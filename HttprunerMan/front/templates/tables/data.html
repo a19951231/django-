@@ -1,0 +1,274 @@
+﻿{% extends 'base/base.html' %}
+{% block title %}
+接口自动化平台-项目列表
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_tdxwsxvnp08.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_b9gb4zj6r9.css">
+    <link rel="stylesheet" href="{% static 'css/form/form.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lite/add_itme.min.css' %}">
+    <script src="{% static 'js/data.min.js' %}"></script>
+    <script id="data-list" type="text/html">
+    {% verbatim %}
+    {{ each datalist datalist1 index }}
+                <tr class="tr-use" style="height:50px;width:300px;" id="end-tr">
+                    <td  class="td-use" title="{{ datalist1.use.case_name }}">
+                        <p class="span-td">{{ datalist1.use.case_name }}</p>
+                    </td>
+                    <td class="td-use td-method" title="{{ datalist1.use.req }}">
+                        <p class="span-td">{{ datalist1.use.req }}</p>
+                    </td>
+                    <td class="td-use" title="{{ datalist1.information }}">
+                        <p class="span-td">{{ datalist1.information }}</p>
+                    </td>
+                    <td class="td-use" title="{{ datalist1.dy_value }}">
+                        <p class="span-td">{{ datalist1.dy_value }}</p>
+                    </td>
+                    {{if datalist1.result=="pass"}}
+                    <td  title="{{ datalist1.result }}" class="td-use" style="color:green;">
+                        <p class="span-td">{{ datalist1.result }}</p>
+                    </td>
+                    {{/if}}
+                    {{if datalist1.result=="fail"}}
+                    <td  title="{{ datalist1.result }}" class="td-use" style="color:red;">
+                        <p class="span-td">{{ datalist1.result }}</p>
+                    </td>
+                    {{/if}}
+                    <td class="td-use" title="" style="display:none;"></td>
+                </tr>
+    {{ /each }}
+    {% endverbatim %}
+</script>
+{% endblock %}
+{% block main %}
+<div id="page-wrapper" style="min-height:900px;">
+		  <div class="header">
+                        <h1 class="page-header">
+                            项目列表<small>页面</small>
+                        </h1>
+						<ol class="breadcrumb">
+					  <li><a href="{% url 'cms:dl' %}">首页</a></li>
+					  <li><a href="{% url 'cms:index' %}">项目列表</a></li>
+					  <li class="active">本页</li>
+					</ol>
+
+		</div>
+            <div id="page-inner" style="min-height:600px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="height:80px;overflow:hidden;">
+                            <div style="width:200px;float:left;"><p>项目列表</p></div>
+                            <div style="width:100px;float:right;margin-top:15px;"><button class="btn btn-primary" id="add-xm">添加项目</button></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>项目名称</th>
+                                            <th>项目负责人</th>
+                                            <th>测试人员</th>
+                                            <th>开发人员</th>
+                                            <th>发布应用</th>
+                                            <th>描述</th>
+                                            <th>模块数/用例数</th>
+                                            <th>其他信息</th>
+                                            <th>创建时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody-xm">
+                                        {% for i in xm %}
+                                            <tr class="odd gradeX">
+                                            <td  title="{{ i.project_name}}">{{ i.project_name | truncatechars:10 }}</td>
+                                            <td title="{ i.responsible_name}}">{{ i.responsible_name | truncatechars:10 }}</td>
+                                            <td title="{{ i.test_user }}">{{ i.test_user | truncatechars:10 }}</td>
+                                            <td class="center" title="{{ i.dev_user }}">{{ i.dev_user | truncatechars:10 }}</td>
+                                            <td class="center" title="{{ i.publish_app }}">{{ i.publish_app | truncatechars:10 }}</td>
+                                            <td title="{{ i.simple_desc }}">{{ i.simple_desc | truncatechars:10 }}</td>
+                                            <td title="{{ i.all_use }}">{{ i.all_use | truncatechars:10 }}</td>
+                                            <td title="{{ i.other_desc }}">{{ i.other_desc | truncatechars:10 }}</td>
+                                            <td title="{{ i.data_time }}" class="center">{{ i.data_time | truncatechars:10 }}</td>
+                                            <td class="center td-xm" id="{{ i.id }}" project_name="{{ i.project_name}}" responsible_name="{{ i.responsible_name}}"
+                                            test_user="{{ i.test_user }}" dev_user="{{ i.dev_user }}" publish_app="{{ i.publish_app }}"
+                                            simple_desc="{{ i.simple_desc }}" other_desc="{{ i.other_desc }}" data_time="{{ i.data_time }}">
+                                                <button class="btn btn-success btn-prohibit"  >启动</button>
+                                                <button class="btn btn-info btn-bule">运行结果</button>
+                                                <button class="btn btn-primary btn-edit">编辑</button>
+                                                <button class="btn btn-danger" >删除</button>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+        </div>
+    </div>
+ <div class="mask-wrapper">
+     <div class="auth-wrapper">
+            <div class="close-wrapper">
+                <span class="close-btn icon-close iconfont"></span>
+            </div>
+            <div class="auth-inner-wrapper">
+                <div class="scroll-wrapper">
+                    <div class="signup-group auth-group">
+                        <div class="top-group">
+                                <span id="title-xm" class="title all-css-e">添加项目:</span>
+                            </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                 <label class="itme all-css-e" >项目名称:</label>
+                                <input type="text" id="project_name" class="form-control" name="project_name" placeholder="请输入项目名称" maxlength="50">
+                            </div>
+                            <div class="input-group">
+                                <label class="responsible all-css-e">负责人员:</label>
+                                <input type="text" id="responsible_name" class="form-control" name="responsible_name" placeholder="请输入负责人" maxlength="20">
+                            </div>
+                            <div class="input-group">
+                                <label class="test all-css-e">测试人员:</label>
+                                <input type="text" id="test_user" class="form-control" name="test_user" placeholder="请输入测试人员名称" maxlength="20">
+                            </div>
+                            <div class="input-group">
+                                <label class="Development all-css-e">开发人员:</label>
+                                <input type="text" id="dev_user" class="form-control" name="dev_user" placeholder="请输入开发人员名称" maxlength="20">
+                            </div>
+                            <div class="input-group">
+                                <label class="application all-css-e">发布应用:</label>
+                                <input type="text" id="publish_app" class="form-control" name="publish_app" placeholder="请输入发布应用名称" maxlength="20">
+                            </div>
+                            <div class="input-group">
+                                <label class="describe all-css-e">描述信息:</label>
+                                <textarea  id="simple_desc" class="form-text" name="simple_desc" placeholder="请输入描述" maxlength="100"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label class="other all-css-e">其他信息:</label>
+                                <textarea  id="other_desc" class="form-text" name="other_desc" placeholder="请输入其他信息" maxlength="100"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="submit-btn-red" value="取消按钮">
+                                <input type="submit" id="submit-btn-bule" class="submit-btn submit-btn-bule" value="保存按钮">
+                                <input type="submit" id="edit-item-btn" class="submit-btn edit-item-btn" value="编辑按钮">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+ <div class="mask-none">
+        <div class="prompt-box">
+             <div class="close-wrapper">
+                 <div class="title">
+                    <span class="ts-title">提示</span>
+                </div>
+                <span class="close-btn1 icon-close iconfont"></span>
+            </div>
+            <div class="Prompt-content">
+                <div class="Prompt-text">
+                    <span class="text-context">确认删除此数据！</span>
+                </div>
+                <div class="confirm">
+                    <input type="submit" class="delete-btn-red" value="确认删除">
+                    <input type="submit" class="cancel-btn" value="取消删除">
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="many-use-wrapper">
+     <div class="auth-wrapper">
+            <div class="close-wrapper">
+                <span class="close-btn icon-close iconfont" id="x-eee-btn"></span>
+            </div>
+            <div class="auth-inner-wrapper">
+                <div class="scroll-wrapper">
+                    <div class="signup-group auth-group">
+                        <div class="top-group">
+                                <span id="title-jg" class="title all-css-e">运行结果:</span>
+                            </div>
+                        <div class="form-group">
+                            <div style="width:88%; margin:0 auto;" class="form-div">
+                    <!-- Advanced Tables -->
+                                <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" style="margin-bottom:0px;width:100%;margin:0 auto;">
+									<colgroup class="colgroup">
+										<col name="el-table_8_column_74" width="83">
+										<col name="el-table_8_column_75" width="83">
+										<col name="el-table_8_column_76" width="50">
+										<col name="el-table_8_column_77" width="83">
+										<col name="el-table_8_column_78" width="83">
+										<col name="el-table_8_column_79" width="83">
+										<col name="el-table_8_column_80" width="83">
+										<col name="el-table_8_column_81" width="50">
+                        			</colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th style="width:124px;">用例名称</th>
+                                            <th style="width:124px;">请求方式</th>
+                                            <th style="width:124px;">运行结果</th>
+                                            <th style="width:124px;">断言结果</th>
+                                            <th style="width:124px;">状态</th>
+											<th style="width: 0px; display: none;"></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+							<div class="table-responsive1" style=" overflow：hidden;max-height:480px;overflow-y: auto;">
+								<table class="table table-striped table-bordered table-hover table-table" style="width:100%;margin:0 auto;">
+									<colgroup class="colgroup">
+										<col name="el-table_8_column_74" width="83">
+										<col name="el-table_8_column_75" width="83">
+										<col name="el-table_8_column_76" width="50">
+										<col name="el-table_8_column_77" width="83">
+										<col name="el-table_8_column_78" width="83">
+										<col name="el-table_8_column_79" width="83">
+										<col name="el-table_8_column_80" width="83">
+										<col name="el-table_8_column_81" width="50">
+                        			</colgroup>
+                                	<tbody  class="tbody-use">
+											<tr class="tr-use" style="height:50px;width:300px;" id="start-tr">
+												<td  class="td-use" title="">
+                                                    <p class="span-td"></p>
+                                                </td>
+												<td class="td-use td-method" title="">
+                                                    <p class="span-td"></p>
+                                                </td>
+												<td class="td-use" title="">
+                                                    <p class="span-td"></p>
+                                                </td>
+												<td class="td-use" title="">
+                                                    <p class="span-td"></p>
+                                                </td>
+												<td  title="" class="td-use" style="color:green;">
+                                                    <p class="span-td"></p>
+                                                </td>
+												<td class="td-use" title="" style="display:none;"></td>
+											</tr>
+                                    </tbody>
+								</table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+{% endblock %}
+
+
+

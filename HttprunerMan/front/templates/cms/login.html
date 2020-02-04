@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>接口自动化平台</title>
+  <!-- Meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content=""
+	 />
+  <script>
+	 addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); }
+  </script>
+  <!-- Meta tags -->
+  <!--stylesheets-->
+  <link href="{% static 'login/css/style.css' %}" rel='stylesheet' type='text/css' media="all">
+  <!--//style sheet end here-->
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+</head>
+<body>
+  <div class="mid-class">
+	 <div class="art-right-w3ls">
+		 {% csrf_token %}
+		<h2>欢迎来到登录页面</h2>
+		   <div class="main">
+			  <div class="form-left-to-w3l">
+				 <input type="text" name="telephone" placeholder="请输入手机号码" required="" maxlength="11" onkeyup="value=value.replace(/[^\d]/g,'')">
+			  </div>
+			  <div class="form-left-to-w3l ">
+				 <input type="password" name="password" placeholder="请输入密码" required="" maxlength="16">
+				 <div class="clear"></div>
+			  </div>
+		   </div>
+		   <div class="left-side-forget">
+			  <input type="checkbox" class="checked" name="remember" value="1">
+			  <span class="remenber-me">记住我 </span>
+		   </div>
+		   <div class="clear"></div>
+		   <div class="btnn">
+			  <button id="btn-login" type="submit">登录</button>
+		   </div>
+	 </div>
+	 <div class="art-left-w3ls">
+		<h1 class="header-w3ls">
+		   接口自动化平台登录页面
+		</h1>
+	 </div>
+  </div>
+  <footer class="bottem-wthree-footer">
+	 <p>2019.地址：xxx <a href="http://www.baidu.com/" target="_blank" title="模板之家">开发人员：刘学良</a> - Collect from <a href="http://www.baidu.com/" title="网页模板" target="_blank">接口自动化平台</a></p>
+  </footer>
+  <script src="{% static 'md5/md5.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/xfzajax.min.js' %}"></script>
+<script src="{% static 'js/message.min.js' %}"></script>
+<script src="{% static 'js/login.min.js' %}"></script>
+</body>
+</html>

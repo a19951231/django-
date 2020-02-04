@@ -1,0 +1,110 @@
+{% extends "base/front_base.html" %}
+{% block title %}
+    小饭桌课程-列表
+{% endblock %}
+{% block head %}
+<!--导入压缩过的js文件-->
+    <script src="{% static 'js/index.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/course/course_index.min.css' %}">
+    <!--下面那个link标签里的href添加阿里行量图标的在线链接-->
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_b9gb4zj6r9.css">
+{% endblock %}
+{% block main %}
+  <!--因为这个网站导航栏底部布局是一个大模块里中间存在一个模块，然后中间的模块左右也存在一个模块
+    所以main里面包括一个wrapper，wrapper里面包含news-wrapper和sidebar-wrapper-->
+    <div class="main">
+        <div class="course-nav">
+            <div class="nav-container">
+                <h3 class="title">在线课堂</h3>
+                <ul class="nav-list">
+                    <li><a href="#" class="ys">最新课堂</a></li>
+                    <li><a href="#">系列课</a></li>
+                    <li><a href="#">投资人说</a></li>
+                    <li><a href="#">明星案例</a></li>
+                    <li><a href="#">创业知识</a></li>
+                    <li><a href="#">会员专区</a></li>
+                    <li><a href="#">我的课堂</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrapper">
+            <ul class="course-list">
+                <li>
+                    <a href="#">
+                        <div class="thumbnail-group">
+                            <img src="https://static-image.xfz.cn/1563171621_723.png-course.list.small" alt="此图片加载不出来" class="thumbnial">
+                            <span>创业知识</span>
+                        </div>
+                        <div class="course-info">
+                            <p class="title">创业CEO如何避免技术决策错误</p>
+                            <p class="author">龚世海  / HiCTO创始人兼CEO</p>
+                            <p class="price-group">
+                                <span class="free">免费</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="thumbnail-group">
+                            <img src="https://static-image.xfz.cn/1563171954_878.png-course.list.small" alt="此图片加载不出来" class="thumbnial">
+                            <span>明星案例</span>
+                        </div>
+                        <div class="course-info">
+                            <p class="title">面对危机公关，多快算快</p>
+                            <p class="author">高超 / 资深品牌公关</p>
+                            <p class="price-group">
+                                <span class="free">免费</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="thumbnail-group">
+                            <img src="https://static-image.xfz.cn/1554346283_804.jpg-course.list.small" alt="此图片加载不出来" class="thumbnial">
+                            <span>投资人说</span>
+                        </div>
+                        <div class="course-info">
+                            <p class="title">投资人教你如何成功融资</p>
+                            <p class="author">乔继英 / 专业投资人；一线...</p>
+                            <p class="price-group">
+                                <span class="true">￥50</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="thumbnail-group">
+                            <img src="https://static-image.xfz.cn/1513075126_301.png-course.list.small" alt="此图片加载不出来" class="thumbnial">
+                            <span>明星案例</span>
+                        </div>
+                        <div class="course-info">
+                            <p class="title">Fintech Evolution in India</p>
+                            <p class="author">Madhu / CEO of KrazyBee</p>
+                            <p class="price-group">
+                                <span class="free">免费</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="thumbnail-group">
+                            <img src="https://static-image.xfz.cn/1563168444_278.png-course.list.small" alt="此图片加载不出来" class="thumbnial">
+                            <span>系列课</span>
+                        </div>
+                        <div class="course-info">
+                            <p class="title">要创业，这些事不可不知</p>
+                            <p class="author">王钊  /  Hi-Finance创始人兼CEO</p>
+                            <p class="price-group">
+                                <span class="free">免费</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

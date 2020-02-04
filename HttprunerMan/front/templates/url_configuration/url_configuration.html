@@ -1,0 +1,129 @@
+{% extends 'base/base.html' %}
+{% block title %}
+接口自动化平台-环境配置列表
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_tdxwsxvnp08.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_b9gb4zj6r9.css">
+    <link rel="stylesheet" href="{% static 'css/url_configuration/url_configuration.min.css' %}">
+    <script src="{% static 'js/url_configuration.min.js' %}"></script>
+{% endblock %}
+{% block main %}
+<div id="page-wrapper" style="min-height:900px;">
+		  <div class="header">
+                        <h1 class="page-header">
+                            环境配置列表<small>页面</small>
+                        </h1>
+						<ol class="breadcrumb">
+					  <li><a href="{% url 'cms:dl' %}">首页</a></li>
+					  <li><a href="{% url 'url_configuration:url_pz' %}">环境配置列表</a></li>
+					  <li class="active">本页</li>
+					</ol>
+
+		</div>
+            <div id="page-inner" style="min-height:600px;">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="height:80px;overflow:hidden;">
+                            <div style="width:200px;float:left;"><p>环境列表</p></div>
+                            <div style="width:100px;float:right;margin-top:15px;"><button class="btn btn-primary" id="add-hj">添加环境</button></div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>环境名称</th>
+                                            <th>环境url</th>
+                                            <th>描述</th>
+                                            <th>创建时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in url %}
+                                            <tr class="odd gradeX">
+                                            <td  title="{{ i.host_name}}">{{ i.host_name | truncatechars:10 }}</td>
+                                            <td class="center" title="{{ i.host_url }}">{{ i.host_url | truncatechars:30 }}</td>
+                                            <td title="{{ i.describe }}">{{ i.describe | truncatechars:10 }}</td>
+                                            <td title="{{ i.data_time }}" class="center">{{ i.data_time | truncatechars:10 }}</td>
+                                            <td class="center" id="{{ i.id }}" host_name="{{ i.host_name}}" host_url="{{ i.host_url}}"
+                                           describe="{{ i.describe }}" data_time="{{ i.data_time }}">
+                                                <button class="btn btn-primary btn-edit">编辑</button>
+                                                <button class="btn btn-danger" >删除</button>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+<div class="hj-wrapper">
+     <div class="auth-wrapper">
+            <div class="close-wrapper">
+                <span class="close-btn icon-close iconfont"></span>
+            </div>
+            <div class="auth-inner-wrapper">
+                <div class="scroll-wrapper">
+                    <div class="signup-group auth-group">
+                        <div class="top-group">
+                                <span id="title-hj" class="title all-css-e">添加环境:</span>
+                            </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                 <label class="itme all-css-e" >环境名称:</label>
+                                <input type="text" id="host_name" class="form-control" name="host_name" placeholder="请输入环境名称" maxlength="20">
+                            </div>
+                            <div class="input-group">
+                                <label class="responsible all-css-e">请求链接:</label>
+                                <input type="text" id="host_url" class="form-control" name="host_url" placeholder="请输入环境url" maxlength="220">
+                            </div>
+                            <div class="input-group">
+                                <label class="describe all-css-e">描述信息:</label>
+                                <textarea  id="describe" class="form-text" name="describe" placeholder="请输入描述" maxlength="100"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="submit-btn-red" value="取消按钮">
+                                <input type="submit" id="submit-btn-bule" class="submit-btn submit-btn-bule" value="保存按钮">
+                                <input type="submit" id="edit-item-btn" class="submit-btn edit-item-btn" value="编辑按钮">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+<div class="mask-none">
+        <div class="prompt-box">
+             <div class="close-wrapper">
+                 <div class="title">
+                    <span class="ts-title">提示</span>
+                </div>
+                <span class="close-btn1 icon-close iconfont"></span>
+            </div>
+            <div class="Prompt-content">
+                <div class="Prompt-text">
+                    <span class="text-context">确认删除此数据！</span>
+                </div>
+                <div class="confirm">
+                    <input type="submit" class="delete-btn-red" value="确认删除">
+                    <input type="submit" class="cancel-btn" value="取消删除">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

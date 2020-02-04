@@ -1,0 +1,187 @@
+<!--
+<header> 标签定义文档或者文档的一部分区域的页眉。
+<header> 元素应该作为介绍内容或者导航链接栏的容器。
+在一个文档中，您可以定义多个 <header> 元素。
+注释：<header> 标签不能被放在 <footer>、<address> 或者另一个 <header> 元素内部。
+-->
+{% extends "base/front_base.html" %}
+{% block title %}
+    小饭桌课程
+{% endblock %}
+{% block head %}
+<!--导入压缩过的js文件-->
+    <script src="{% static 'js/index.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/course/course_detail.min.css' %}">
+    <!--下面那个link标签里的href添加阿里行量图标的在线链接-->
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_b9gb4zj6r9.css">
+{% endblock %}
+
+{% block main %}
+  <!--因为这个网站导航栏底部布局是一个大模块里中间存在一个模块，然后中间的模块左右也存在一个模块
+    所以main里面包括一个wrapper，wrapper里面包含news-wrapper和sidebar-wrapper-->
+    <div class="main">
+        <div class="course-nav">
+            <div class="nav-container">
+                <h3 class="title">在线课堂</h3>
+                <ul class="nav-list">
+                    <li><a href="#" class="ys">最新课堂</a></li>
+                    <li><a href="#">系列课</a></li>
+                    <li><a href="#">投资人说</a></li>
+                    <li><a href="#">明星案例</a></li>
+                    <li><a href="#">创业知识</a></li>
+                    <li><a href="#">会员专区</a></li>
+                    <li><a href="#">我的课堂</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="course-wrapper">
+                <div class="course-info">
+                    <p class="course-title">开启办公场景革命的新格局</p>
+                    <div class="price-group">
+                        <div class="share-group">
+                            <span class="title">分享至：</span>
+                            <a class="weixin sheet">
+                            </a>
+                            <a  href="https://ziyuan.baidu.com/" target="_blank" class="weibo sheet"></a>
+                            <a href="https://ziyuan.baidu.com/?castk=LTE%3D" target="_blank" class="weibo"></a>
+                        </div>
+                        <div class="buy-group">
+                            <span class="price pay">￥49.0</span>
+                            <a href="#" class="buy-btn">立即购买</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-group">
+                    <img src="https://static-image.xfz.cn/1554346116_489.png" class="bt-photo">
+                        <img src="https://www.xfz.cn/static/build/images/pc-icon-replay.png" class="bt">
+            </div>
+        </div>
+            <div class="bottom-wrapper">
+                <div class="course-wrapper">
+                    <div class="item-group">
+                        <p class="item-title">课程讲师</p>
+                        <div class="teacher-group">
+                            <div class="avatar-group">
+                                <img src="https://static-image.xfz.cn/1508120349_172.jpg">
+                            </div>
+                            <div class="author-info">
+                                <p class="teacher-name">乔继英</p>
+                                <p class="teacher-desc">专业投资人、一线基金董事总经理</p>
+                            </div>
+                        </div>
+                        <p class="item-content">
+                            乔继英，专业投资人，一线基金董事总经理，十五年以上研发、市场销售、投资经验，投资领域覆盖天使投资、中早期风险投资、PE投资、并购、母基金FOF投资等领域。代表案例：华润凤凰（1515.HK）、微芯生物、二毛照护、九鼎美元基金等。个人间接投资摩拜单车、硅谷大数据公司Palantir等。曾在淡马锡祥峰投资、蓝驰创投、启迪创投等工作，世界五百强公司研发、市场销售主管。北京市高精尖产业基金评审组长、知名证券公司专业专家。清华大学本科、医学院博士、校友导师，曾与哈佛大学合作课题；香港中文大学金融MBA、客座讲师。
+                        </p>
+                    </div>
+                    <div class="item-group">
+                        <p class="item-title">课程简介</p>
+                        <p class="item-content">
+                            股权结构是创业公司稳定的基础，如何打好这个公司的地基，除了创始人本身对这个事情的重视、认知、理解，有时甚至是需要专业的法律团队来进行股权结构设计的。如何设计股权结构、保证股权结构的合理性并同时具有公司控制权呢？听听专业投资人的意见。
+                        </p>
+                    </div>
+                    <div class="item-group">
+                        <p class="item-title">课程大纲</p>
+                        <p class="item-content">
+                            一、股权结构是创业公司稳定的基础<br>
+
+二、股权结构的重要性<br>
+
+三、如何设计股权结构<br>
+
+四、出让股权同时如何保证公司的控制权<br>
+
+五、股权激励税负和股份支付的问题<br>
+
+六、股权结构不合理如何处理<br>
+
+七、股权的民主与集中<br>
+                        </p>
+                    </div>
+                    <div class="item-group">
+                        <p class="item-title">课程信息</p>
+                        <p class="item-content">
+                            课程主题：创业公司如何设计股权结构<br>
+
+上课方式：在线视频学习<br>
+
+课程时长：32分钟<br>
+
+收费：59元<br>
+
+时间：付费后可随时观看<br>
+                        </p>
+                    </div>
+                    <div class="item-group">
+                        <p class="item-title">适宜人群</p>
+                        <p class="item-content">
+                            初创公司及早期创业团队成员
+                        </p>
+                    </div>
+                    <div class="item-group">
+                        <p class="item-title">帮助中心</p>
+                        <p class="item-content">
+                            1. 购买后的课程在线可反复观看学习，视频有效期以具体课程信息为准。<br>
+2. 课程暂不支持下载观看，均为在线观看视频。<br>
+3. 课程一经购买，不可转让、不可退款；仅限购买账号观看。<br>
+4. 如有问题请咨询客服饭桌君： 电话：18618172287 微信：fanzhuojun888<br>
+                        </p>
+                    </div>
+                    <div class="item-group">
+                        <p class="item-title">关于小饭桌创业课堂在线课堂</p>
+                        <p class="item-content">
+                            小饭桌创业课堂在线课堂是小饭桌旗下的线上视频课程产品，汇聚顶级创业大咖导师、行业资深专家，致力于用系统、垂直的知识体系让创业者认知升级、技能进阶。小饭桌创业课堂在线课堂用知识陪伴创业者从平凡到卓越！
+                        </p>
+                    </div>
+                </div>
+                <div class="recommand-wrapper">
+                    <p class="recommand-title">推荐课堂</p>
+                    <ul class="course-list">
+                        <li>
+                            <a href="">
+                                <div class="all-course">
+                                    <div class="course-info-group">
+                                    <p class="course-title">融资时，投资条款说了什么？</p>
+                                    <p class="teacher">王益为/未来法律联合创始人</p>
+                                </div>
+                                <div class="thumbnail-group">
+                                    <img src="https://static-image.xfz.cn/1493895112_250.jpg-course.list.small" alt="此图片加载中..." class="thumbnail">
+                                    <img src="https://www.xfz.cn/static/build/images/video-tag.png" class="vido-thumbnail">
+                                </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="all-course">
+                                    <div class="course-info-group">
+                                    <p class="course-title">融资时，投资条款说了什么？</p>
+                                    <p class="teacher">王益为/未来法律联合创始人</p>
+                                </div>
+                                <div class="thumbnail-group">
+                                    <img src="https://static-image.xfz.cn/1493895112_250.jpg-course.list.small" alt="此图片加载中..." class="thumbnail">
+                                    <img src="https://www.xfz.cn/static/build/images/video-tag.png" class="vido-thumbnail">
+                                </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="all-course">
+                                    <div class="course-info-group">
+                                    <p class="course-title">融资时，投资条款说了什么？</p>
+                                    <p class="teacher">王益为/未来法律联合创始人</p>
+                                </div>
+                                <div class="thumbnail-group">
+                                    <img src="https://static-image.xfz.cn/1493895112_250.jpg-course.list.small" alt="此图片加载中..." class="thumbnail">
+                                    <img src="https://www.xfz.cn/static/build/images/video-tag.png" class="vido-thumbnail">
+                                </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

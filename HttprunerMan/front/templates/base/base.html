@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+	<!-- Bootstrap Styles-->
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet" />
+     <!-- Morris Chart Styles-->
+        <!-- Custom Styles-->
+    <link href="{% static 'assets/css/custom-styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/use/init.min.css' %}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+     <!-- TABLE STYLES-->
+    <link href="{% static 'assets/js/dataTables/dataTables.bootstrap.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation" style="z-index:1;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><strong>接口自动化平台</strong></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <!-- /.dropdown -->
+                <!-- /.dropdown -->
+                <!-- 就是列表的右上角用户信息 -->
+                {% if user.is_authenticated %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> {{user.username}}</a>
+                            </li>
+                            <li><a href="{% url 'other:user_functions' %}"><i class="fa fa-gear fa-fw"></i>用户信息</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li id="logout-login"><a href="#"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                <li>请登录</li>
+                {% endif %}
+                    <!-- /.dropdown-user -->
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation" style="z-index:1;">
+            <div class="sidebar-collapse" style="z-index:1;">
+                <ul class="nav" id="main-menu">
+
+                    <li id="li-index" class="active-menu">
+                        <a href="{% url 'cms:dl' %}"  id="index"><i class="fa fa-dashboard"></i> 首页</a>
+                    </li>
+                    <li id="li-xm">
+                        <a href="{% url 'cms:index' %}" id="xm-list"><i class="fa fa-table"></i>项目列表</a>
+                    </li>
+                    <li id="li-module">
+                        <a href="{% url 'module_name:module_list' %}" id="mk-list"><i class="fa fa-desktop"></i> 模块列表</a>
+                    </li>
+					<li id="li-use">
+                        <a href="{% url 'use_case:use_list' %}" id="yl-list"><i class="fa fa-bar-chart-o"></i> 用例列表</a>
+                    </li>
+                    <li id="li-url">
+                        <a href="{% url 'url_configuration:url_pz' %}" id="hj-list"><i class="fa fa-qrcode"></i> 环境添加列表</a>
+                    </li>
+                    <li id="li-qt">
+                        <a href="#" id="gn-list"><i class="fa fa-sitemap"></i> 其它功能<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">定时任务</a>
+                            </li>
+                            <li>
+                                <a href="#">发送邮件设置</a>
+                            </li>
+                            <li>
+                                <a href="#">报告列表</a>
+                            </li>
+                            <li>
+                                <a href="#">设置<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="{% url 'other:change_password' %}">更改密码</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'other:user_functions' %}">用户信息</a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        {% block main %}{% endblock %}
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
+      <!-- Bootstrap Js -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Metis Menu Js -->
+    <script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
+     <!-- DATA TABLE SCRIPTS -->
+    <script src="{% static 'assets/js/dataTables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'assets/js/dataTables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'assets/js/morris/raphael-2.1.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/morris/morris.js' %}"></script>
+
+
+	<script src="{% static 'assets/js/easypiechart.js' %}"></script>
+	<script src="{% static 'assets/js/easypiechart-data.js' %}"></script>
+
+	 <script src="{% static 'assets/js/Lightweight-Chart/jquery.chart.js' %}"></script>
+
+
+    <script src="{% static 'js/template-web.js' %}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
+         <!-- Custom Js -->
+    <script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script> var jq331 = jQuery.noConflict(true); </script><!--這樣設置jq别名，因为这里引用了2个jq版本，怕有冲突-->
+    <script src="{% static 'js/xfzajax.min.js' %}"></script>
+    <script src="{% static 'js/message.min.js' %}"></script>
+    <script src="{% static 'js/base.min.js' %}"></script>
+    {% block head %}{% endblock %}
+
+</body>
+</html>

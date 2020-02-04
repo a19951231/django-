@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	$("#btn1").click(function(){
+		$("#box").animate({height:"300px"},5000);
+	});
+	$("#btn2").click(function(){
+		$("#box").animate({height:"100px"});
+	});
+});
+</script>
+</head>
+<body>
+<!--当click点击id为btn1按钮就执行
+$("#box").animate({height:"300px"},5000);代码，就是把id为box的元素的高设置为300px，并且5秒完成-->
+<button id="btn1">使用动画放大高度</button>
+<button id="btn2">重置高度</button>
+<div id="box" style="background:#98bf21;height:100px;width:100px;margin:6px;">
+</div>
+
+</body>
+</html>

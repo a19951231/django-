@@ -1,0 +1,182 @@
+body{/* 这里是设置body标签的css代码，background是设置背景颜色，background:yellow;
+是设置背景颜色为黄色*/
+    background:#F0F0F0;
+}
+.all-mb{
+    width:992px;
+    background:#fff;
+    margin:0 auto;
+    box-shadow:5px 10px 10px #888888;//设置边框阴影
+    border-radius:5px;//设置边框的圆滑度
+    border:2px solid #eee;
+    .size-mb{
+        //float:left;
+        padding:10px 20px;
+        overflow:hidden;
+        .title-big{
+            .title{
+                float:left;
+                font-size:28px;
+
+                padding: 0 20px;
+                border-left:6px solid #000;
+                box-shadow:5px 2px 10px #888888;
+                border-radius:3px;//设置边框的圆滑度
+                background:#CCFFFF;
+            }
+        }
+        .weng-ben{
+            width:100%;
+            float:left;
+            span{
+                margin-top:20px;
+                float:left;
+                font-size:28px;
+                color:#878787;
+                padding: 0 20px;
+                border-left:6px solid #878787;
+                box-shadow:5px 2px 10px #888888;
+                border-radius:3px;//设置边框的圆滑度
+                background:#CCFFFF;
+                }
+         }
+        .all-left-result{
+            float:left;
+            margin-top:20px;
+            .number-of-executions{
+                margin-right:10px;
+                cursor:pointer;//设置鼠标放到按钮里显示小手
+                float:left;
+                background:yellow;
+                width:200px;
+                height:100px;
+                padding:10px 10px;
+                box-shadow:5px 2px 10px #888888;
+                border-radius:5px;//设置边框的圆滑度
+                border-left:8px solid #eee;
+                span{
+                    color:#878787;
+                    font-size:20px;
+                    float:left;
+                    margin-left:10px;
+                }
+                p{
+                    float:right;
+                    font-size:50px;
+                    padding:0 10px;
+                }
+
+            }
+            .adopt{
+                margin-right:10px;
+                float:left;
+                cursor:pointer;//设置鼠标放到按钮里显示小手
+                background:#006633;
+                width:200px;
+                height:100px;
+                padding:10px 10px;
+                box-shadow:5px 2px 10px #888888;
+                border-radius:5px;//设置边框的圆滑度
+                border-left:8px solid #eee;
+                span{
+                    color:#878787;
+                    font-size:20px;
+                    float:left;
+                    margin-left:10px;
+                }
+                p{
+                    float:right;
+                    font-size:50px;
+                    padding:0 10px;
+                }
+            }
+            .fail{
+                margin-right:10px;
+                float:left;
+                cursor:pointer;//设置鼠标放到按钮里显示小手
+                background:#e63929;
+                width:200px;
+                height:100px;
+                padding:10px 10px;
+                box-shadow:5px 2px 10px #888888;
+                border-radius:5px;//设置边框的圆滑度
+                border-left:8px solid #eee;
+                span{
+                    color:#878787;
+                    font-size:20px;
+                    float:left;
+                    margin-left:10px;
+                }
+                p{
+                    float:right;
+                    font-size:50px;
+                    padding:0 10px;
+                }
+            }
+            .suspend{
+                margin-right:10px;
+                float:left;
+                cursor:pointer;//设置鼠标放到按钮里显示小手
+                background:#878787;
+                width:200px;
+                height:100px;
+                padding:10px 10px;
+                box-shadow:5px 2px 10px #888888;
+                border-radius:5px;//设置边框的圆滑度
+                border-left:8px solid #eee;
+                span{
+                    color:#fff;
+                    font-size:20px;
+                    float:left;
+                    margin-left:10px;
+                }
+                p{
+                    float:right;
+                    font-size:50px;
+                    padding:0 10px;
+                }
+            }
+        }
+    }
+}
+
+.all-mb2{
+    width:992px;
+    background:#fff;
+    margin:0 auto;
+    box-shadow:5px 10px 10px #888888;//设置边框阴影
+    border-radius:5px;//设置边框的圆滑度
+    border:2px solid #eee;
+    .size-mb2{
+        padding:10px 20px;
+        overflow:hidden;
+        .table-condensed{
+            overflow:hidden;
+            //border-radius:1px;//设置边框的圆滑度
+            //border-radius:10px;
+            .text-center{
+                border-radius:1px;//设置边框的圆滑度
+                //background:red;
+                th{
+                    width:200px;
+                    font-size: 15px;
+                    border:1px solid #878787;
+                    background:#99FF99;
+                    border-radius:1px;//设置边框的圆滑度
+                }
+            }
+            .text-center1{
+                cursor:pointer;//设置鼠标放到按钮里显示小手
+                //border-radius:1px;//设置边框的圆滑度
+                .list{
+                    //width:250px;
+                    overflow:hidden;
+                    background:#eee;
+                    border:1px solid #878787;
+                    font-size:12px;
+                    font-weight:100;
+                }
+            }
+        }
+    }
+}

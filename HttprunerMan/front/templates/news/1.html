@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("p").hover(function(){
+    $("p").css("background-color","yellow");
+    },function(){
+    $("p").css("background-color","pink");
+  });
+});
+</script>
+</head>
+<body>
+
+<p>鼠标移动到该段落。</p>
+
+</body>
+<!--当鼠标到p标签上就执行$("p").css("background-color","red");就是字体背景颜色变红色
+css这个就是改变标签的css属性或添加css属性-->
+</html>

@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %}
+{% block title %}
+接口自动化平台-首页
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_tdxwsxvnp08.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1000923_b9gb4zj6r9.css">
+	<link rel="stylesheet" href="{% static 'css/index/index.min.css' %}">
+	<script src="{% static 'js/index.min.js' %}"></script>
+<script id="time-list" type="text/html">
+    {% verbatim %}<!--在这个参数里加其他的代码不会被django识别为django内置的代码，是会转字符串-->
+    <!--template用法的地址https://aui.github.io/art-template/zh-cn/docs/rules.html，可以在官网下载模板查看使用方法-->
+    {{ each timelist i index }}
+        <option class="option" value ="{{ i.function_time }}">{{ i.function_time }}</option>
+    {{ /each }}
+    {% endverbatim %}
+</script>
+<script id="time-list1" type="text/html">
+    {% verbatim %}
+    {{ each timelist1 b index }}
+	<div class="row" style="width:92.5%; margin:0 auto;">
+        <div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>总用例数:</h4>
+						<div class="easypiechart" id="easypiechart-blue" title="{{ b.all_use_case }}条" data-percent="{{ b.all_use_case }}" ><p style="width:120px;overflow: hidden;text-overflow: ellipsis;cursor: pointer;" class="percent">{{ b.all_use_case }}条</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>暂停用例概率：</h4>
+						<div class="easypiechart" id="easypiechart-orange" title="{{ b.suspend_percentage }}" data-percent="{{ b.suspend_use_case }}" ><p style="width:120px;overflow: hidden;text-overflow: ellipsis;cursor: pointer;" class="percent">{{ b.suspend_percentage }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>通过用例概率：</h4>
+						<div class="easypiechart" id="easypiechart-teal" title="{{ b.pass_percentage }}" data-percent="{{ b.pass_use_case }}" ><p style="width:120px;overflow: hidden;text-overflow: ellipsis;cursor: pointer;" class="percent">{{ b.pass_percentage }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>失败用例概率：</h4>
+						<div class="easypiechart" id="easypiechart-red" title="{{ b.fail_percentage }}" data-percent="{{ b.fail_use_case }}" ><span style="width:120px;overflow: hidden;text-overflow: ellipsis;cursor: pointer;" class="percent">{{ b.fail_percentage }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+    {{ /each }}
+    {% endverbatim %}
+</script>
+{% endblock %}
+{% block main %}
+<div id="page-wrapper" style="min-height: 900px; overflow: hidden;" class="wrapper">
+		<div class="header" style="width:90%; margin:0 auto;">
+                        <h1 class="page-header">
+                            首页<small>显示</small>
+                        </h1>
+						<ol class="breadcrumb">
+					  <li class="active">运行的用例结果：</li>
+					</ol>
+
+		</div>
+		<div class="header" style="width:90%; margin:0 auto;">
+						<div class="breadcrumb breadcrumb1">
+							<div class="time-box">
+								<span class="title-bg">报告时间：</span>
+								<select id="correlation-module" name="box-time" class="form-control-select belong_project sz-form">
+
+								</select>
+								<button type="button" class="btn btn-primary" id="query-btn">查询</button>
+							</div>
+					</div>
+
+		</div>
+		<div class="row1">
+
+		</div>
+        </div>
+{% endblock %}

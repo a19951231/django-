@@ -1,0 +1,465 @@
+.use-wrapper{
+    z-index:10000;
+    display:none;
+    position:fixed;//这个是固定定位，固定浏览器位置进行定位
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow-y:scroll;//这个是设置y租的滚动条，就是内容多出来会在右边显示滚动条
+    background:rgba(0,0,0,0.3);//这样可以设置透明度，rgba代表红，绿，蓝，黑4种颜色，后面的黑设置0.3就是黑色的透明度，其他设置0就是没有其他颜色
+    .auth-wrapper{
+        //$authWrapperHeight:420px;//这里取一个变量设置它的高度
+        $authWrapperWidth:500px;
+        width:$authWrapperWidth;
+        //height:$authWrapperHeight;
+        background:#fff;
+        //margin:120px auto;
+        position:absolute;//绝对定位
+        top:50%;
+        left:50%;
+        margin-left:-210px;
+        margin-top:-250px;
+        .close-wrapper{
+            width:100%;
+            height:30px;
+            background:#fff;
+            box-sizing:border;
+            margin-top:16px;
+            padding-top:10px;
+            .close-btn{
+                //display:inline-block;//这样就设置span为一个盒子，可以设置它的长高
+                width:30px;
+                height:20px;
+                float:right;
+                //margin-top:16px;
+                //margin-right:13px;
+                color:#cdcdcd;
+                background:#fff;
+                font-size:14px;//s设置大小
+                cursor:pointer;
+            }
+        }
+        .auth-inner-wrapper{
+            marign-top:50px;
+            width:100%;
+            height:550px;
+            //overflow:auto;
+            //background:#fff;
+            position:relative;
+            //overflow:hidden;
+            .scroll-wrapper{
+                width:$authWrapperWidth;
+                //height:800px;
+                position:absolute;
+                left:0;
+                top:0;
+                //background:#fff;
+                .auth-group{
+                    overflow:auto;
+                    width:$authWrapperWidth;
+                    height:100%;
+                    padding:20px;
+                    padding-top:1px;
+                    box-sizing:border-box;
+                    .top-group{
+                       height:30px;
+                       border-bottom:1px solid #eee;
+                       line-height:28px;
+                       font-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                       font-size:16px;
+                       .title{
+                        float:left;
+                        color:#000;
+                        border-bottom:3px solid #2da7fe;
+                       }
+                       .switch{
+                        float:right;
+                        color:#2da7fe;
+                       }
+                    }
+                    .form-group{
+                        height:490px;
+                        width:480px;
+                        margin-top:20px;
+                        overflow:auto;
+                        .input-group{
+                            //margin-bottom:10px;
+                            overflow:hidden;
+                            //height:53px;
+                            .submit-btn{
+                                border-radius: 5px;//设置边框的角
+                                margin-top:10px;
+                                margin-left:10px;
+                                width:80px;
+                                height:40px;
+                                background:#3f89ec;
+                                color:#fff;
+                                font-size:16px;
+                                //font-weight: 800;
+                                border:none;
+                                cursor:pointer;
+
+                                &:hover{
+                                    background:#4490f7;
+                                }
+                            }
+                            .submit-btn-bule{
+                                display:none;
+                            }
+                            .edit-item-btn{
+                                display:none;
+                            }
+                            .submit-btn-red{
+                                margin-left:150px;
+                                border-radius: 5px;//设置边框的角
+                                margin-top:10px;
+                                width:80px;
+                                height:40px;
+                                background: #e63929;
+                                color:#fff;
+                                font-size:16px;
+                                //font-weight: 800;
+                                border:none;
+                                cursor:pointer;
+                                &:hover{
+                                    background:red;
+                                }
+                            }
+                            .title-zfc{
+                                float:left;
+                                //width:300px;
+                                .btn{
+                                    width:45px;
+                                    height:20px;
+                                    margin-top:10px;
+                                    //text-align: center;
+                                    line-height:3px;
+                                }
+                                .all-css-e{
+                                    font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                    font-size:14px;
+                                    margin-left:37px;
+                                    float:left;
+                                    margin-right:10px;
+                                    margin-top:10px;
+                                    color: #858b9c;
+                                    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+                                }
+                            }
+                            .form-cont{
+                                //border:1px solid #ccc;
+                                padding:10px;
+                                margin-bottom:20px;
+                                box-sizing:border-box;
+                                width:80px;
+                                border: 1px solid #dcdfe6;
+                                color: #858b9c;
+                                float:left;
+                                height:40px;
+                                outline:none;
+                                //font-size:12px;
+                                font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                border-radius: 4px;//设置边框的角
+                                font-size: 12px;
+                                //font-weight: 600;
+                                box-sizing: border-box;
+                                ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                            }
+                            .form-control-select{
+                                //border:1.5px solid #ccc;
+                                padding:10px;
+                                margin-bottom:20px;
+                                box-sizing:border-box;
+                                //width:80px;
+                                border: 1px solid #dcdfe6;
+                                color: #858b9c;
+                                float:left;
+                                height:37px;
+                                outline:none;
+                                //font-size:12px;
+                                font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                //border-radius: 4px;//设置边框的角
+                                font-size: 10px;
+                                //font-weight: 600;
+                                box-sizing: border-box;
+                                ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                            }
+                            .sz-form{
+                                width:220px;
+                                border-radius: 4px;//设置边框的角
+                                height:35px;
+                                margin-top:3px;
+                            }
+                            .sz-form1{
+                                width:80px;
+                                border-radius: 4px;//设置边框的角
+                                height:35px;
+                                margin-top:3px;
+                            }
+                            .content{
+                                float:left;
+                                margin-left:37px;
+                                .form-keyvalue{
+                                    border:0.5px solid #ccc;
+                                    padding:10px;
+                                    margin-bottom:20px;
+                                    box-sizing:border-box;
+                                    width:167px;
+                                    //border: 1px solid #dcdfe6;
+                                    color: #858b9c;
+                                    float:left;
+                                    height:37px;
+                                    outline:none;
+                                    //font-size:12px;
+                                    font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                    //border-radius: 4px;//设置边框的角
+                                    font-size: 13px;
+                                    //font-weight: 600;
+                                    box-sizing: border-box;
+                                    ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                                }
+                                .xx-keyvalue{
+                                    border:0.5px solid #ccc;
+                                    padding:10px;
+                                    margin-bottom:20px;
+                                    box-sizing:border-box;
+                                    width:200px;
+                                    //border: 1px solid #dcdfe6;
+                                    color: #858b9c;
+                                    float:left;
+                                    height:37px;
+                                    outline:none;
+                                    //font-size:12px;
+                                    font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                    //border-radius: 4px;//设置边框的角
+                                    font-size: 13px;
+                                    //font-weight: 600;
+                                    box-sizing: border-box;
+                                    ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                                }
+                            }
+                            .content{
+                                float:left;
+                                margin-left:37px;
+                                .form-keyvalue{
+                                    border:0.5px solid #ccc;
+                                    padding:10px;
+                                    margin-bottom:20px;
+                                    box-sizing:border-box;
+                                    width:167px;
+                                    //border: 1px solid #dcdfe6;
+                                    color: #858b9c;
+                                    float:left;
+                                    height:37px;
+                                    outline:none;
+                                    //font-size:12px;
+                                    font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                    //border-radius: 4px;//设置边框的角
+                                    font-size: 13px;
+                                    //font-weight: 600;
+                                    box-sizing: border-box;
+                                    ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                                }
+                                .xx-keyvalue{
+                                    border:0.5px solid #ccc;
+                                    padding:10px;
+                                    margin-bottom:20px;
+                                    box-sizing:border-box;
+                                    width:200px;
+                                    //border: 1px solid #dcdfe6;
+                                    color: #858b9c;
+                                    float:left;
+                                    height:37px;
+                                    outline:none;
+                                    //font-size:12px;
+                                    font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                    //border-radius: 4px;//设置边框的角
+                                    font-size: 13px;
+                                    //font-weight: 600;
+                                    box-sizing: border-box;
+                                    ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                                }
+                            }
+                            .all-css{
+                                font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                font-size:14px;
+                                margin-left:37px;
+                                float:left;
+                                margin-right:10px;
+                                margin-top:10px;
+                                color: #858b9c;
+                                font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+                            }
+                            .form-control{
+                                border:1.5px solid #ccc;
+                                padding:10px;
+                                margin-bottom:20px;
+                                box-sizing:border-box;
+                                width:300px;
+                                border: 1px solid #dcdfe6;
+                                color: #858b9c;
+                                float:left;
+                                height:40px;
+                                outline:none;
+                                //font-size:12px;
+                                font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                border-radius: 4px;//设置边框的角
+                                font-size: 13px;
+                                //font-weight: 600;
+                                box-sizing: border-box;
+                                ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+                            }
+                             .form-text{
+                                border:1.5px solid #ccc;
+                                padding:10px;
+                                margin-bottom:20px;
+                                box-sizing:border-box;
+                                width:400px;
+                                border: 1px solid #dcdfe6;
+                                color: #858b9c;
+                                float:left;
+                                height:100px;
+                                outline:none;
+                                //font-size:12px;
+                                font-family: PingFang SC,Lantinghei SC,Helvetica Neue,Helvetica,Arial,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,STHeitiSC-Light,simsun,\\5B8B\4F53,WenQuanYi Zen Hei,WenQuanYi Micro Hei,sans-serif;
+                                border-radius: 4px;//设置边框的角
+                                font-size: 13px;
+                                //font-weight: 600;
+                                box-sizing: border-box;
+                                ont-family: 'Microsoft YaHei',Helvetica,Arial,sans-serif;
+
+                            }
+                            .form-height{
+                                height:150px;
+                            }
+                        }
+                        .display-wb{
+                            display:none;
+                        }
+                        .display-data{
+                            display:block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.mask-none{
+    z-index:10000;
+    display:none;
+    position:fixed;//这个是固定定位，固定浏览器位置进行定位
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow-y:scroll;//这个是设置y租的滚动条，就是内容多出来会在右边显示滚动条
+    background:rgba(0,0,0,0.6);//这样可以设置透明度，rgba代表红，绿，蓝，黑4种颜色，后面的黑设置0.3就是黑色的透明度，其他设置0就是没有其他颜色
+    .prompt-box{
+        $authWrapperHeight:710px;//这里取一个变量设置它的高度
+        $authWrapperWidth:300px;
+        width:$authWrapperWidth;
+        height:$authWrapperHeight;
+        //background:#fff;
+        //margin:120px auto;
+        position:absolute;//绝对定位
+        top:80%;
+        left:50%;
+        margin-left:-$authWrapperWidth/2;
+        margin-top:-$authWrapperHeight/2;
+        .close-wrapper{
+            line-height:40px;
+            width:100%;
+            height:50px;
+            background:#fff;
+            box-sizing:border;
+            padding-top:10px;
+            .title{
+                //overflow:hidden;
+                width:60px;
+                height:40px;
+                line-height:40px;
+                float:left;
+                //margin-left:10px;
+                .ts-title{
+                    //font-size:14px;
+                    margin-left:10px;
+                    font-size: 20px;
+                    line-height: 1;
+                    color: #333;
+                    text-rendering: optimizeLegibility;
+                    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+                }
+            }
+            .close-btn1{
+                display:inline-block;//这样就设置span为一个盒子，可以设置它的长高
+                width:30px;
+                height:20px;
+                float:right;
+                //margin-top:16px;
+                color:#cdcdcd;
+                background:#fff;
+                font-size:15px;//s设置大小
+                cursor:pointer;
+            }
+        }
+        .Prompt-content{
+            width:100%;
+            height:100px;
+            background:#fff;
+            border-top: 1px solid #2da7fe;
+            .Prompt-text{
+                line-height:50px;
+                float:left;
+                width:100%;
+                height:50px;
+                .text-context{
+                    margin-left:10px;
+                    color: #858b9c;
+                    font-size: 16px;
+                    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+                }
+            }
+            .confirm{
+                float:left;
+                width:100%;
+                height:50px;
+                .delete-btn-red{
+                   border-radius: 5px;//设置边框的角
+                   margin-top:10px;
+                   margin-left:70px;
+                   width:70px;
+                   height:30px;
+                   background:#e63929;
+                   color:#fff;
+                   font-size:13px;
+                   //font-weight: 800;
+                   border:none;
+                   cursor:pointer;
+
+                   &:hover{
+                      background:red;
+                   }
+                }
+                .cancel-btn{
+                   border-radius: 5px;//设置边框的角
+                   margin-top:10px;
+                   margin-left:10px;
+                   width:70px;
+                   height:30px;
+                   background:#3f89ec;
+                   color:#fff;
+                   font-size:13px;
+                   //font-weight: 800;
+                   border:none;
+                   cursor:pointer;
+
+                   &:hover{
+                      background:#4490f7;
+                   }
+                }
+            }
+        }
+    }
+}
