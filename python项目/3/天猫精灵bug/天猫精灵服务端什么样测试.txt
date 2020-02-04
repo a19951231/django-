@@ -1,0 +1,16 @@
+查看jbl后台服务端信息，需要在电脑里配置预发二的绑定，
+在C:\Windows\System32\drivers\etc下的hots中增加以下配置项
+
+140.205.173.181 gp2-aicloud.alibaba.com，就可以通过开发给的url，
+然后改一下url的uuid，就可以查看它服务端的消息，一般我们在服务端查看它是否待机
+，正常状态，因为天猫精灵休眠是待机状态（60s内没有对X1进行操作会主动进入休眠），
+天猫精灵在播放音乐，交互等等是正常状态
+
+
+ota或后台升级后，我们会查看一下它的mac有没有改变，一般在cmd里adb shell连接X1
+通过命令进行查看
+无线mac：cat /sys/class/net/wlan0/address
+
+蓝牙mac：cat /data/misc/bluedroid/bt_config.conf
+
+查看蓝牙名称：cat /data/misc/bluetooth/bt_local_device_info.txt

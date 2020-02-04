@@ -1,0 +1,123 @@
+1.news目录下的views文件
+index方法里需要改的代码：
+newses = News.objects.select_related('category','author').all()[0:count]#然后这里是获取1，2的2编的文章
+    #这样查询会一次性把该关联数据的外键category，author的数据进行查询出来，这样我们前端进行调用就不需要进行又一次查询数据库，如果直接使用all()查询，当外键的时候，前端进行拿起关联的外键的数据就会进行一次查询，select_related方法添加一对多的关联字段，就会把关联的数据都查询出来先，这样前端掉用的时候就可以不需要对数据库进行查询
+
+news_list方法里的代码：
+    if category_id == 0:
+        # QuerySet
+        # {'id':1,'title':'abc',category:{"id":1,'name':'热点'}}
+        newses = News.objects.select_related('category','author').all()[start:end]
+    else:
+        newses = News.objects.select_related('category','author').filter(category__id=category_id)[start:end]
+
+news_detail方法里的代码：
+news = News.objects.select_related('category','author').get(pk=news_id)
+
+
+2.django-debug-toolbar工具
+学习网址：https://django-debug-toolbar:readthedocs.io/en/stable/installation.html
+1.这个工具可以查看到我们页面进行多少条sql语句还有页面加载时间和sql查询需要的时间
+安装命令：pip install django-debug-toolbar命令安装，但需要在项目的目录进行安装，
+2.安装完成在我们项目的setting文件里进行下面配置：
+INSTALLED_APPS = [
+    'debug_toolbar'#在api上添加这个，
+]
+3.然后在urls文件里对面django-debug-toolbar工具进行url配置：
+if settings.DEBUG:#意思就是debug为true的时候才执行下面代码
+    import debug_toolbar
+    urlpatterns.append(path("__debug__/",include(debug_toolbar.urls)))
+
+4.然后在setting里的配置中间件那边进行配置，但顺序很重要
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',#配置这个中间件，但这个中间件可以在压缩文件的中间件后面
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+5.然后在setting里配置ip地址：
+# Django-Debug-Toolbar相关的配置
+INTERNAL_IPS = ['127.0.0.1']#因为我们在本地开发，所以直接写127.0.0.1
+
+6.然后我们在setting设置一下我们需要显示哪些功能：
+#这里可以显示我们想要的功能，如果我们不需要直接备注它
+DEBUG_TOOLBAR_PANELS = [
+    # 代表是哪个django版本
+    'debug_toolbar.panels.versions.VersionsPanel',
+    # 用来计时的，判断加载当前页面总共花的时间
+    'debug_toolbar.panels.timer.TimerPanel',
+    # 读取django中的配置信息
+    'debug_toolbar.panels.settings.SettingsPanel',
+    # 看到当前请求头和响应头信息
+    'debug_toolbar.panels.headers.HeadersPanel',
+    # 当前请求的想信息（视图函数，Cookie信息，Session信息等）
+    'debug_toolbar.panels.request.RequestPanel',
+    # 查看SQL语句
+    'debug_toolbar.panels.sql.SQLPanel',
+    # 静态文件
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    # 模板文件
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    # 缓存
+    'debug_toolbar.panels.cache.CachePanel',
+    # 信号
+    'debug_toolbar.panels.signals.SignalsPanel',
+    # 日志
+    'debug_toolbar.panels.logging.LoggingPanel',
+    # 重定向
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]
+
+6.然后我们在setting里配置下面的操作，把JQUERY_URL设置为空，这样我们页面加载这个工具的时候不需要加载国外的jq文件，直接加载我们页面的jq文件，这样就不需要加载慢，如果我们没有jq文件，我们可以百度找一个jq文件的url放到JQUERY_URL里就可以
+DEBUG_TOOLBAR_CONFIG = {
+    'JQUERY_URL': ''
+}
+
+
+283节内容：
+1.news目录下的modles文件里增加下面的模型
+class Comment(models.Model):#员工评论模型
+    content = models.TextField()#评论内容
+    pub_time = models.DateTimeField(auto_now_add=True)#评论发布时间
+    news = models.ForeignKey("News",on_delete=models.CASCADE,related_name='comments')#评论所属的新闻，这里是通过外键
+    author = models.ForeignKey("xfzauth.User",on_delete=models.CASCADE)#批量的作者，这里是使用外键
+
+    class Meta:
+        ordering = ['-pub_time']
+
+2.然后在news目录下的forms文件里添加下面代码：
+from django import forms
+from apps.forms import FormMixin
+
+
+class PublicCommentForm(forms.Form,FormMixin):#这个是评论的表单验证
+    content = forms.CharField()#评论的内容
+    news_id = forms.IntegerField()#我们需要获取评论的新闻id
+
+3.在news目录下的serializers文件里写下面代码：
+from .models import News,NewsCategory,Comment
+class CommentSerizlizer(serializers.ModelSerializer):#文章评论序列化
+    author = UserSerializer()#这个是author设置关联的序列化类名称
+    class Meta:
+        model = Comment
+        fields = ('id','content','author','pub_time')
+
+4.然后在news目录下的views文件里写下面视图：
+from .models import Comment
+from .serializers import NewsSerializer,CommentSerizlizer
+from .forms import PublicCommentForm
+def public_comment(request):#这个是用户评论的视图
+    form = PublicCommentForm(request.POST)
+    if form.is_valid():#表单验证通过执行下面代码
+        news_id = form.cleaned_data.get('news_id')#获取新闻的id
+        content = form.cleaned_data.get('content')#获取评论内容
+        news = News.objects.get(pk=news_id)#查询该新闻内容
+        comment = Comment.objects.create(content=content,news=news,author=request.user)#把信息储蓄到数据库，#request.user是获取用户信息，这样获取的话，只能是我们用户表是继承django内置的user模型
+        serizlize = CommentSerizlizer(comment)#这里没有加many=True，是因为comment不是quset对象
+        return restful.result(data=serizlize.data)
+    else:
+        return restful.params_error(message=form.get_errors())
