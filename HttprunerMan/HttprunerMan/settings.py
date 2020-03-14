@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cms.entry_name',#项目名称模块
     'cms.module_name',#模块名称模块
     'cms.other_functions',#其他功能模块
+    'cms.Mysql_yl',#mysql模块
     'rest_framework',#导入序列化模块
     'cms.url_configuration',#环境配置模块
     'cms.use_case',#用例模块
@@ -98,8 +99,7 @@ DATABASES = {
         'PASSWORD':'123456',#PASSWORD是输入我们数据库的密码
         'HOST':'127.0.0.1',#HOST是输入数据库主机的ip
         'PORT':'3306',#PORT是输入数据库的端口
-        #我们在DATABASES里设置这些内容就可以使django连接我们的数据库
-        'OPTIONS': {#如果运行的时候报Cannot add or update a child row:a foreign key constraint fails错误就添加这个
+        'OPTIONS': {
             "init_command": "SET foreign_key_checks = 0;",
         }
     }
@@ -152,46 +152,22 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[#这样就配置我们静态文件路径，这里先获取xfz这个目录路径，然后再进入front里，再进入dist路径找我们的存放的css或js静态文件
+STATICFILES_DIRS=[
     os.path.join(BASE_DIR,"front","dist")
 ]
 
-MEDIA_URL='/media/'#配置一下我们获取图片的地址
-MEDIA_ROOT=os.path.join(BASE_DIR,"media")#配置我们上传图片储蓄的文件
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
-# Django-Debug-Toolbar相关的配置
-INTERNAL_IPS = ['127.0.0.1']#因为我们在本地开发，所以直接写127.0.0.1
+INTERNAL_IPS = ['127.0.0.1']
 
-
-#这里可以显示我们想要的功能，如果我们不需要直接备注它
 DEBUG_TOOLBAR_PANELS = [
-    # 代表是哪个django版本
     'debug_toolbar.panels.versions.VersionsPanel',
-    # 用来计时的，判断加载当前页面总共花的时间
     'debug_toolbar.panels.timer.TimerPanel',
-    # 读取django中的配置信息
-    #'debug_toolbar.panels.settings.SettingsPanel',
-    # 看到当前请求头和响应头信息
-    #'debug_toolbar.panels.headers.HeadersPanel',
-    # 当前请求的想信息（视图函数，Cookie信息，Session信息等）
-    #'debug_toolbar.panels.request.RequestPanel',
-    # 查看SQL语句
     'debug_toolbar.panels.sql.SQLPanel',
-    # 静态文件
-    #'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    # 模板文件
-    #'debug_toolbar.panels.templates.TemplatesPanel',
-    # 缓存
-    #'debug_toolbar.panels.cache.CachePanel',
-    # 信号
-    #'debug_toolbar.panels.signals.SignalsPanel',
-    # 日志
-    #'debug_toolbar.panels.logging.LoggingPanel',
-    # 重定向
-    #'debug_toolbar.panels.redirects.RedirectsPanel',
+
 ]
 
-#6.然后我们在setting里配置下面的操作，把JQUERY_URL设置为空，这样我们页面加载这个工具的时候不需要加载国外的jq文件，直接加载我们页面的jq文件，这样就不需要加载慢，如果我们没有jq文件，我们可以百度找一个jq文件的url放到JQUERY_URL里就可以
 DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': 'https://code.jquery.com/jquery-3.4.0.min.js'
 }

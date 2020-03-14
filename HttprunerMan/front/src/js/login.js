@@ -107,18 +107,16 @@ function Base64() {
     }
 }
 
-Login.prototype.LoginBtn = function () {//点击登录的请求事件
+Login.prototype.LoginBtn = function () {
     var self = this;
     var base = new Base64();
     var uploadBtn1 = $('#btn-login');
-    console.log("已经执行");//打印日志
     uploadBtn1.click(function (event) {
         event.preventDefault();
         var phone=$("input[name='telephone']").val();
         var pwd=$("input[name='password']").val();
         var pwd_md5= base.encode(pwd);
-        var remember=$("input[name='remember']").prop("checked");//因为remember是勾选框，是通过prop("checked")获取
-        console.log(phone);//打印日志
+        var remember=$("input[name='remember']").prop("checked");
         xfzajax.post({
             'url': '/cms/login/',
             'data': {
@@ -129,7 +127,7 @@ Login.prototype.LoginBtn = function () {//点击登录的请求事件
             'success': function (result) {
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/jk/dl/"
                     },1000);
                 }
@@ -142,12 +140,10 @@ Login.prototype.LoginBtn = function () {//点击登录的请求事件
 Login.prototype.run=function(){
     var self=this;
     self.LoginBtn();
-    //self.listenUploadFielEvent();
-    //self.listenQiniuUploadFileEvent();
+
 };
 
 $(function(){
     var login=new Login();
     login.run();
-    //News.progressGroup = $('#progress-group');//定义这个获取id为progress-group位置
 });

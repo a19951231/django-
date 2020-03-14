@@ -41,9 +41,11 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> {{user.username}}</a>
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i> {{user.username}}</a>
                             </li>
-                            <li><a href="{% url 'other:user_functions' %}"><i class="fa fa-gear fa-fw"></i>用户信息</a>
+                            <li>
+                                <a href="{% url 'other:user_functions' %}"><i class="fa fa-gear fa-fw"></i>用户信息</a>
                             </li>
                             <li class="divider"></li>
                             <li id="logout-login"><a href="#"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
@@ -77,8 +79,19 @@
                     <li id="li-url">
                         <a href="{% url 'url_configuration:url_pz' %}" id="hj-list"><i class="fa fa-qrcode"></i> 环境添加列表</a>
                     </li>
+                    <li id="li-mysql">
+                        <a href="#" id="mysql-list"><i class="fa fa-sitemap"></i>数据库操作<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{% url 'Mysql_yl:mysql_list' %}">数据库列表</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'Mysql_yl:mysql_command' %}">添加数据库命令列表</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li id="li-qt">
-                        <a href="#" id="gn-list"><i class="fa fa-sitemap"></i> 其它功能<span class="fa arrow"></span></a>
+                        <a href="#" id="gn-list"><i class="glyphicon glyphicon-cog"></i> 其它功能<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">定时任务</a>

@@ -5,9 +5,8 @@ from cms.module_name.forms import Cms_Moudle#导入表单验证模块
 from cms.cms_user.models import User
 from django.views.decorators.http import require_POST,require_GET
 from cms.entry_name.models import ProjectInfo#导入项目模块模型
-from requests_stats import restful#导入方法，这样就可以调用def定义f方法
-from cms.decorators import get_required,post_required#导入装饰器
-from django.utils.decorators import method_decorator#导入给视图进行装饰的模块
+from requests_stats import restful
+from cms.decorators import get_required,post_required
 import time
 # Create your views here.
 @get_required
@@ -43,8 +42,8 @@ def add_module(request):#添加模块视图
         module_order=forms.cleaned_data.get("module_order")
         id = request.session.get("_auth_user_id")
         a = request.session.keys()
-        is_module = ProjectInfo.objects.filter(pk=int(belong_project))  # 查询项目关联的模块
-        is_case_url = is_module.filter(moduleInfo__module_order=module_order).exists()  # 然后查询这个模块关联的用例顺序是否存在我提交的顺序
+        is_module = ProjectInfo.objects.filter(pk=int(belong_project))
+        is_case_url = is_module.filter(moduleInfo__module_order=module_order).exists()
         if is_case_url:  # 如果存在执行下面代码
             return restful.unauth(message="此用例运行顺序已存在！")
         else:
@@ -61,9 +60,8 @@ def add_module(request):#添加模块视图
                     iteme.save()
                     return restful.result(message="添加模块成功！")
     else:
-        errors = forms.get_errors()  # 400错误是参数错误
-        # 返回数据类型如:{"password":["xxxx","xxxx"]}
-        return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+        errors = forms.get_errors()
+        return restful.params_error(message=errors)
 
 @post_required
 @require_POST
@@ -112,8 +110,9 @@ def edit_module(request):#编辑项目视图
             else:
                 return restful.unauth(message="您输入id不存在！")
         else:
-            errors = forms.get_errors()  # 400错误是参数错误
-            # 返回数据类型如:{"password":["xxxx","xxxx"]}
-            return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+            errors = forms.get_errors()
+            return restful.params_error(message=errors)
     else:
         return restful.unauth(message="id号不能为空")
+
+

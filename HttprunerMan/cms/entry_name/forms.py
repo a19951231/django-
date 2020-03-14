@@ -4,7 +4,7 @@ from cms.error import Basserrors#导入错误整理的方法
 from cms.froms import FormMixin
 from django.core import validators
 
-class Cms_projectInfo(forms.ModelForm,FormMixin):#定义项目名称创建的表单验证
+class Cms_projectInfo(forms.ModelForm,FormMixin):
     class Meta:
         model=ProjectInfo
         exclude=["user","data_time","updata_time","all_use"]

@@ -28,8 +28,9 @@ urlpatterns = [
     path("qt/",include("cms.other_functions.urls")),
     path("url_pz/",include("cms.url_configuration.urls")),
     path("use/",include("cms.use_case.urls")),
+    path("mysql_list/",include("cms.Mysql_yl.urls"))
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:#意思就是debug为true的时候才执行下面代码
+if settings.DEBUG:
     import debug_toolbar
     urlpatterns.append(path("__debug__/",include(debug_toolbar.urls)))

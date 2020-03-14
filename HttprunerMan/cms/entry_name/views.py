@@ -11,7 +11,8 @@ from cms.request_mode.models import operation_information#导入储蓄用例
 import time
 from django.core.cache import cache#储蓄到内容的模块
 from cms.module_name.models import ModuleInfo#导入模块模型
-from cms.request_mode.req_mode import req_mode,data,header,assertion,get_value,read_req,reg
+from cms.request_mode.req_mode import req_mode,header,assertion,get_value,read_req
+from cms.use_case.views import reg,data
 from django.db.models import Q,F,Avg,Count,Prefetch
 from celery_tasks.tasks import run_multiple_use_cases
 from cms.request_mode.serializers import operation_informationSerializer#序列化模块
@@ -46,9 +47,8 @@ def add_item(request):#添加项目的视图
                 iteme.save()
                 return restful.result(message="添加项目成功！")
     else:
-        errors = forms.get_errors()  # 400错误是参数错误
-        # 返回数据类型如:{"password":["xxxx","xxxx"]}
-        return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+        errors = forms.get_errors()
+        return restful.params_error(message=errors)
 
 @post_required
 @require_POST
@@ -98,9 +98,8 @@ def edit_item(request):#编辑项目视图
             else:
                 return restful.unauth(message="您输入id不存在！")
         else:
-            errors = forms.get_errors()  # 400错误是参数错误
-            # 返回数据类型如:{"password":["xxxx","xxxx"]}
-            return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+            errors = forms.get_errors()
+            return restful.params_error(message=errors)
     else:
         return restful.unauth(message="id号不能为空")
 
@@ -111,69 +110,6 @@ def edit_item(request):#编辑项目视图
 def edit_function(request):#运行多条用例的视图
     userid = request.session.get("_auth_user_id")
     id = request.POST.get("id")
-    '''
-    if id:
-            all_edit=ProjectInfo.objects.get(pk=id)
-            if all_edit:
-                module_prefetch = Prefetch("moduleInfo", queryset=ModuleInfo.objects.order_by("module_order"))  # 这里是把我们需要过滤的东西在这里过滤
-                use_prefetch = Prefetch("usecase_set", queryset=Usecase.objects.order_by("case_order"))
-                module_data = ProjectInfo.objects.prefetch_related(module_prefetch)  # prefetch_related只用在一对多或多对一或多对多
-                use_data = ModuleInfo.objects.prefetch_related(use_prefetch)
-                for i in module_data:
-                    print(i.project_name)
-                    module_all = i.moduleInfo.all()  # 这里可以使用all()，但不能使用filter()否则会产生多条查询语句
-                    for sub_data in module_all:
-                        for use_data_all in use_data:
-                            if sub_data.module_name == use_data_all.module_name:
-                                print(use_data_all.module_name)
-                                usecase_data_all = use_data_all.usecase_set.all()
-                                for usecase in usecase_data_all:
-                                    print(usecase.case_name)
-                                    method = usecase.req  # 请求方式
-                                    print(method)
-                                    url1 = usecase.use_case1.host_url
-                                    url2 =usecase.case_url  # 请求的后面的url
-                                    url = url1 + url2  # 用例总url
-                                    headers = header(key=eval(usecase.header_key), value=eval(reg(json_keyvalue=usecase.header_value)))
-                                    if usecase.value_type == "form-data":
-                                        datas = data(key=eval(usecase.data_key), alltype=eval(usecase.data_type),
-                                                     value=eval(usecase.data_value))
-                                    else:
-                                        datas = eval(reg(json_keyvalue=usecase.json_keyvalue))
-                                        print(datas)
-                                    if method == "GET":
-                                        print(usecase.value_type)
-                                        req = req_mode(method=method, url=url, params=datas, headers=headers,zt=usecase.value_type)
-                                        print("333333333",req)
-                                    else:
-                                        req = req_mode(method=method, url=url, data=datas, headers=headers, zt=usecase.value_type)
-                                        print(req)
-                                    dy_keylist = get_value(req=req, key=eval(usecase.dy_key))
-                                    print("================")
-                                    all_extract_stat = read_req(key=eval(usecase.all_extract), req_ode=req)
-                                    if all_extract_stat == []:  # 如果空就pass跳过
-                                        pass
-                                    else:
-                                        for read in range(0, len(eval(usecase.all_extract))):
-                                            cache.set(eval(usecase.all_extract)[read], all_extract_stat[read], 3600)
-                                            # result = cache.get(eval(i.all_extract)[0])#这个是取内存内容
-                                    print("!111111111111")
-                                    asserts = assertion(key=dy_keylist, alltype=eval(usecase.dy_type), value=eval(usecase.dy_value))
-                                    print("!===========",asserts)
-                                    data_times = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                                    print(data_times)
-                                    operation = operation_information.objects.create(information=req,result=asserts,function_time=data_times,user_id=userid, use_id=id)
-                                    print("2222222222222222222222")
-                                    # operation.save()
-                                    usecase_data_all.update(state=asserts)
-                            else:
-                                pass
-                return restful.result(message="已运行成功！")
-            else:
-                return restful.unauth(message="此项目id不存在！")
-    else:
-        return restful.params_error(message="请输入正确的用例id！")
-    '''
     if id:
         all_edit = ProjectInfo.objects.get(pk=id)
         if all_edit:
@@ -187,16 +123,16 @@ def edit_function(request):#运行多条用例的视图
 
 @post_required
 @require_POST
-def edit_details(request):#明天还需要设置区分多条用例运行的结果和单条用例运行结果，需要在数据库里operation_information表里添加一个字段来储蓄才可以编写
+def edit_details(request):
     userid = request.session.get("_auth_user_id")
     id = request.POST.get("id")
     if id:
         all_edit = ProjectInfo.objects.get(pk=id)
         if all_edit:
-            module_prefetch = Prefetch("moduleInfo",queryset=ModuleInfo.objects.order_by("module_order"))  # 这里是把我们需要过滤的东西在这里过滤
+            module_prefetch = Prefetch("moduleInfo",queryset=ModuleInfo.objects.order_by("module_order"))
             use_prefetch = Prefetch("usecase_set", queryset=Usecase.objects.order_by("case_order"))
             operation=Prefetch("operation_information_set",queryset=operation_information.objects.filter(use_case_mode="many").order_by("-data_time"))
-            module_data = ProjectInfo.objects.filter(id=id).prefetch_related(module_prefetch)  # prefetch_related只用在一对多或多对一或多对多
+            module_data = ProjectInfo.objects.filter(id=id).prefetch_related(module_prefetch)
             use_data = ModuleInfo.objects.prefetch_related(use_prefetch)
             use_case=Usecase.objects.prefetch_related(operation)
             a=operation_information.objects.filter(use_case_mode="many").order_by("-data_time")
@@ -204,8 +140,8 @@ def edit_details(request):#明天还需要设置区分多条用例运行的结�
             all_result=[]
             for i in module_data:
                 print(i.project_name)
-                module_all = i.moduleInfo.all()  # 这里可以使用all()，但不能使用filter()否则会产生多条查询语句
-                if module_all:#如果存在关联的模块继续执行
+                module_all = i.moduleInfo.all()
+                if module_all:
                     for sub_data in module_all:
                         for use_data_all in use_data:
                             if sub_data.module_name == use_data_all.module_name:
@@ -217,7 +153,7 @@ def edit_details(request):#明天还需要设置区分多条用例运行的结�
                                     print(usecase2)
                                 else:
                                     usecase2 = 0
-                                if usecase_data_all:#如果存在关联用例继续执行
+                                if usecase_data_all:
                                     for usecase in usecase_data_all:
                                         for use_ca in use_case:
                                             if usecase.case_name==use_ca.case_name:
@@ -227,45 +163,19 @@ def edit_details(request):#明天还需要设置区分多条用例运行的结�
                                                 print(len(operation_all))
                                                 if operation_all:
                                                     if len(operation_all)==1:
-                                                        serializer = operation_informationSerializer(operation_all,many=True)  # 这里就把我们获取的news的数据传入这个序列化里，然后定义many=True就是所有数据都需要序列化
-                                                        data = serializer.data[-1]  # 然后我们只能通过data才可以拿到我们序列化的数据，
-                                                        '''
-                                                        case_name=usecase.case_name#获取用例名称
-                                                        result[0]=case_name
-                                                        req=usecase.req#获取请求方式
-                                                        result[1] =req
-                                                        for operation1 in operation_all:
-                                                            information=operation1.information#获取运行信息
-                                                            result[2] = information
-                                                            result1=operation1.result#获取运行结果
-                                                            result[3] = result1
-                                                            dy_value=operation1.dy_value#获取断言结果
-                                                            result[4]=dy_value
-                                                            '''
+                                                        serializer = operation_informationSerializer(operation_all,many=True)
+                                                        data = serializer.data[-1]
+
                                                         all_result.append(data)
                                                         print("hahah")
                                                     else:
                                                         serializer = operation_informationSerializer(operation_all,
-                                                                                                     many=True)  # 这里就把我们获取的news的数据传入这个序列化里，然后定义many=True就是所有数据都需要序列化
-                                                        data = list(reversed(serializer.data))[-1] # 然后我们只能通过data才可以拿到我们序列化的数据，
-                                                        '''
-                                                        case_name=usecase.case_name#获取用例名称
-                                                        result[0]=case_name
-                                                        req=usecase.req#获取请求方式
-                                                        result[1] =req
-                                                        for operation1 in operation_all:
-                                                            information=operation1.information#获取运行信息
-                                                            result[2] = information
-                                                            result1=operation1.result#获取运行结果
-                                                            result[3] = result1
-                                                            dy_value=operation1.dy_value#获取断言结果
-                                                            result[4]=dy_value
-                                                            '''
+                                                                                                     many=True)
+                                                        data = list(reversed(serializer.data))[-1]
+
                                                         all_result.append(data)
-                                                    print("1111111")
                                                 else:
                                                     pass
-                                                #all_result.append(data)
                                 else:#不存在关联用例执行下面
                                     pass
                 else:#不存在关联模块执行下面

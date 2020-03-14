@@ -9,7 +9,7 @@ Base.prototype.run=function(){
     self.szclassEvent();
 };
 
-Base.prototype.szclassEvent=function(){//退出登录的ajax请求
+Base.prototype.szclassEvent=function(){
     var self=this;
     self.logoutlogin.click(function(){
         xfzajax.post({
@@ -18,7 +18,7 @@ Base.prototype.szclassEvent=function(){//退出登录的ajax请求
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
                     console.log("已执行编辑===")
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/cms/logout"
                    },1000);
                 }
@@ -29,8 +29,7 @@ Base.prototype.szclassEvent=function(){//退出登录的ajax请求
 
 };
 
-jq331(function($){//这里就使用jq331这个jqbie名进行调用jq版本3.3.1
+jq331(function($){
     var base=new Base();
-    console.log("执行");//打印日志
-    base.run();//当所有元素加载出来会执行run方法
+    base.run();
 });

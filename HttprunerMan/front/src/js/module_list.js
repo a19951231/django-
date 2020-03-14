@@ -1,9 +1,9 @@
 //这个是module_list.html上的js代码
 function Module(){
     var self=this;
-    self.maskWrapper=$('.module-wrapper');//先找到class属性为mask-wrapper
-    self.delete_btn=$(".btn-danger");//获取删除按钮位置
-    self.masknone=$('.mask-none');//先找到class属性为mask-none
+    self.maskWrapper=$('.module-wrapper');
+    self.delete_btn=$(".btn-danger");
+    self.masknone=$('.mask-none');
     self.titlexm=$("#title-mk");
     self.limodule=$("#li-module");
 };
@@ -16,29 +16,28 @@ Module.prototype.run=function(){
 
 };
 
-Module.prototype.hideEvent=function(){//这个方法是隐藏事件
+Module.prototype.hideEvent=function(){
     var self=this;
-    var module_name=$('#module_name').val("");//清空文本信息
-    var module_name1=$('#module_name1').val("");//清空文本信息
+    var module_name=$('#module_name').val("");
+    var module_name1=$('#module_name1').val("");
     var module_order=$("#module_order").val("");
     var belong_project=$('.belong_project').val("");
-    //var test_user1=('#test_user').val("");
     var simple_desc=$('#simple_desc').val("");
     var other_desc=$('#other_desc').val("");
-    self.maskWrapper.hide();//hide()是隐藏，把maskWrapper隐藏
+    self.maskWrapper.hide();
 };
 
-Module.prototype.showEvent=function(){//这个是展示事件
+Module.prototype.showEvent=function(){
     var self=this;
-    self.maskWrapper.show();//把这个maskWrapper属性显示出来，show()是显示
+    self.maskWrapper.show();
 };
 
-Module.prototype.listenShowHideEvent=function(){//这个是监听展示与隐藏事件方法
+Module.prototype.listenShowHideEvent=function(){
     var self=this;
-    var siginBtn=$('#add-mk');//这里是获取id为add-xm的位置
-    var closeBtn=$('.close-btn');//x按钮
-    var cleanBten=$('.submit-btn-red');//取消按钮
-    var submitbtnbule=$("#submit-btn-bule");//保存按钮
+    var siginBtn=$('#add-mk');
+    var closeBtn=$('.close-btn');
+    var cleanBten=$('.submit-btn-red');
+    var submitbtnbule=$("#submit-btn-bule");
     var edititembtn=$("#edit-item-btn");
     siginBtn.click(function(){
         self.showEvent();
@@ -58,11 +57,10 @@ Module.prototype.listenShowHideEvent=function(){//这个是监听展示与隐藏
     });
 };
 
-Module.prototype.addbtnEvent=function(){//这个是添加项目的ajax请求
-    var self=this;
+Module.prototype.addbtnEvent=function(){
     var submitbtn=$('#submit-btn-bule');
     submitbtn.click(function(){
-        var module_name=$('#module_name').val();//获取文本信息
+        var module_name=$('#module_name').val();
         var module_name1=$('#module_name1').val();
         var belong_project=$('#belong_project').val();
         console.log(belong_project);
@@ -83,42 +81,42 @@ Module.prototype.addbtnEvent=function(){//这个是添加项目的ajax请求
             'success': function (result) {
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/mk/"
                     },900);
 
                 }
             }
         });
-        edititembtn.attr('id','submit-btn-bule');//修改id属性
+        edititembtn.attr('id','submit-btn-bule');
     });
 };
 
-Module.prototype.noneshowEvent=function(){//这个是提示框展示事件
+Module.prototype.noneshowEvent=function(){
     var self=this;
-    self.masknone.show();//把这个maskWrapper属性显示出来，show()是显示
+    self.masknone.show();
 };
-Module.prototype.nonehideEvent=function(){//这个方法是隐藏提示框事件
+Module.prototype.nonehideEvent=function(){
     var self=this;
-    self.masknone.hide();//hide()是隐藏，把maskWrapper隐藏
+    self.masknone.hide();
 };
 
-Module.prototype.detelebtnEvent=function(){//点击删除按钮弹出提示框的js事件
+Module.prototype.detelebtnEvent=function(){
     var self=this;
     self.delete_btn.click(function(){
         self.noneshowEvent();
     });
 };
 
-Module.prototype.deleteShowHideEvent=function(){//这个是监听展示与隐藏提示框事件方法包括ajax请求
+Module.prototype.deleteShowHideEvent=function(){
     var self=this;
     var id="";
-    var closeBtn=$('.close-btn1');//获取x按钮
-    var cleanBten=$('.cancel-btn');//获取取消按钮
-    var delete_red=$('.delete-btn-red');//获取删除按钮
+    var closeBtn=$('.close-btn1');
+    var cleanBten=$('.cancel-btn');
+    var delete_red=$('.delete-btn-red');
     self.delete_btn.click(function(){
-        var currentBtn = $(this);//这里的$(this)就是获取deleteBtn.click的位置，就是我点击的位置
-        var tr = currentBtn.parent();//然后这里parent()是获取点击事件的父级的位置，2个parent是获取deleteBtn.click点击位置的父级的父级
+        var currentBtn = $(this);
+        var tr = currentBtn.parent();
         id=tr.attr("id");
         console.log(id)
         self.noneshowEvent();
@@ -140,20 +138,20 @@ Module.prototype.deleteShowHideEvent=function(){//这个是监听展示与隐藏
             'success': function (result) {
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/mk/"
                     },900);
                 }
             }
         });
     });
-    self.limodule.attr("class","active-menu").siblings().removeClass('active-menu');//如果添加这里，我们跳转这个页面就需要执行这个代码
+    self.limodule.attr("class","active-menu").siblings().removeClass('active-menu');
 };
 
-Module.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
+Module.prototype.editbtnEvent=function(){
     var self=this;
-    var btnprimary=$(".btn-edit");//获取编辑按钮的位置
-    var edititembtn=$(".edit-item-btn");//获取页面的编辑按钮
+    var btnprimary=$(".btn-edit");
+    var edititembtn=$(".edit-item-btn");
     var id="";
     var module_name="";
     var module_name1="";
@@ -165,9 +163,8 @@ Module.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
         self.showEvent();
         edititembtn.show();
         self.titlexm.text("编辑模块");
-        //edititembtn.attr('id','edit-item-btn');//修改id属性
-        var currentBtn = $(this);//这里的$(this)就是获取deleteBtn.click的位置，就是我点击的位置
-        var tr = currentBtn.parent();//然后这里parent()是获取点击事件的父级的位置，2个parent是获取deleteBtn.click点击位置的父级的父级
+        var currentBtn = $(this);
+        var tr = currentBtn.parent();
         id=tr.attr("id");
         module_name=tr.attr("module_name");
         module_name1=tr.attr("test_user");
@@ -176,7 +173,7 @@ Module.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
         console.log(belong_project)
         simple_desc=tr.attr("simple_desc");
         other_desc=tr.attr("other_desc");
-        var module_name11=$('#module_name').val(module_name);//设置文本内容
+        var module_name11=$('#module_name').val(module_name);
         var module_name12=$('#module_name1').val(module_name1);
         var belong_project1=$('#belong_project').val(belong_project);
         var module_order1=$('#module_order').val(module_order);
@@ -186,7 +183,7 @@ Module.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
         var other_desc1=$('#other_desc').val(other_desc);
         console.log(other_desc1)
         edititembtn.click(function(){
-            var module_name13=$('#module_name').val();//设置文本内容
+            var module_name13=$('#module_name').val();
             var module_name14=$('#module_name1').val();
             var belong_project2=$('#belong_project').val();
             var simple_desc2=$('#simple_desc').val();
@@ -207,7 +204,7 @@ Module.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
                     console.log("已执行编辑===")
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/mk/"
                     },1000);
                     self.titlexm.text("添加模块");
@@ -218,10 +215,10 @@ Module.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
     });
 };
 
-jq331(function($){//这里就使用jq331这个jqbie名进行调用jq版本3.3.1
+jq331(function($){
     var self=this;
     var module=new Module();
-    console.log("执行");//打印日志
-    module.run();//当所有元素加载出来会执行run方法
-    self.limodule.attr("class","active-menu").siblings().removeClass('active-menu');//如果添加这里，我们跳转这个页面就需要执行这个代码
+    console.log("执行");
+    module.run();
+    self.limodule.attr("class","active-menu").siblings().removeClass('active-menu');
 });

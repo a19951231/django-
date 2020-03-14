@@ -1,11 +1,11 @@
 //这个是data.html上的js代码
 function Data(){
     var self=this;
-    self.maskWrapper=$('.mask-wrapper');//先找到class属性为mask-wrapper
-    self.delete_btn=$(".btn-danger");//获取删除按钮位置
-    self.masknone=$('.mask-none');//先找到class属性为mask-none
+    self.maskWrapper=$('.mask-wrapper');
+    self.delete_btn=$(".btn-danger");
+    self.masknone=$('.mask-none');
     self.titlexm=$("#title-xm");
-    self.lixm=$("#li-xm");//id为li-xm的位置
+    self.lixm=$("#li-xm");
     self.detailswrapper=$(".many-use-wrapper");
 };
 Data.prototype.run=function(){
@@ -18,32 +18,32 @@ Data.prototype.run=function(){
     self.detailsShowHideEvent();
 };
 
-Data.prototype.hideEvent=function(){//这个方法是隐藏事件
+Data.prototype.hideEvent=function(){
     var self=this;
-    var project_name=$('#project_name').val("");//清空文本信息
+    var project_name=$('#project_name').val("");
     var responsible_name=$('#responsible_name').val("");
     var test_user=$('#test_user').val("");
     var dev_user=$('#dev_user').val("");
     var publish_app=$('#publish_app').val("");
     var simple_desc=$('#simple_desc').val("");
     var other_desc=$('#other_desc').val("");
-    self.maskWrapper.hide();//hide()是隐藏，把maskWrapper隐藏
+    self.maskWrapper.hide();
 };
 
-Data.prototype.showEvent=function(){//这个是展示事件
+Data.prototype.showEvent=function(){
     var self=this;
-    self.maskWrapper.show();//把这个maskWrapper属性显示出来，show()是显示
+    self.maskWrapper.show();
 };
 
-Data.prototype.listenShowHideEvent=function(){//这个是监听展示与隐藏事件方法
+Data.prototype.listenShowHideEvent=function(){
     var self=this;
-    var siginBtn=$('#add-xm');//这里是获取id为add-xm的位置
+    var siginBtn=$('#add-xm');
     var closeBtn=$('.close-btn');
     var cleanBten=$('.submit-btn-red');
     var submitbtnbule=$("#submit-btn-bule");
     var edititembtn=$("#edit-item-btn");
     siginBtn.click(function(){
-        self.showEvent();//当我们点击登录就执行显示的事件方法
+        self.showEvent();
         submitbtnbule.show();
     });
     closeBtn.click(function(){
@@ -60,11 +60,11 @@ Data.prototype.listenShowHideEvent=function(){//这个是监听展示与隐藏�
     });
 };
 
-Data.prototype.addbtnEvent=function(){//这个是添加项目的ajax请求
+Data.prototype.addbtnEvent=function(){
     var self=this;
     var submitbtn=$('#submit-btn-bule');
     submitbtn.click(function(){
-        var project_name=$('#project_name').val();//清空文本信息
+        var project_name=$('#project_name').val();
         var responsible_name=$('#responsible_name').val();
         var test_user=$('#test_user').val();
         var dev_user=$('#dev_user').val();
@@ -87,40 +87,40 @@ Data.prototype.addbtnEvent=function(){//这个是添加项目的ajax请求
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
                     console.log("已执行===")
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/jk/"
                    },1000);
                 }
             }
         });
-        edititembtn.attr('id','submit-btn-bule');//修改id属性
+        edititembtn.attr('id','submit-btn-bule');
     });
 };
 
-Data.prototype.noneshowEvent=function(){//这个是提示框展示事件
+Data.prototype.noneshowEvent=function(){
     var self=this;
-    self.masknone.show();//把这个maskWrapper属性显示出来，show()是显示
+    self.masknone.show();
 };
-Data.prototype.nonehideEvent=function(){//这个方法是隐藏提示框事件
+Data.prototype.nonehideEvent=function(){
     var self=this;
-    self.masknone.hide();//hide()是隐藏，把maskWrapper隐藏
+    self.masknone.hide();
 };
 
-Data.prototype.detelebtnEvent=function(){//点击删除按钮弹出提示框的js事件
+Data.prototype.detelebtnEvent=function(){
     var self=this;
     self.delete_btn.click(function(){
         self.noneshowEvent();
     });
 };
-Data.prototype.deleteShowHideEvent=function(){//这个是监听展示与隐藏提示框事件方法包括ajax请求
+Data.prototype.deleteShowHideEvent=function(){
     var self=this;
     var id="";
     var closeBtn=$('.close-btn1');
     var cleanBten=$('.cancel-btn');
     var delete_red=$('.delete-btn-red');
     self.delete_btn.click(function(){
-        var currentBtn = $(this);//这里的$(this)就是获取deleteBtn.click的位置，就是我点击的位置
-        var tr = currentBtn.parent();//然后这里parent()是获取点击事件的父级的位置，2个parent是获取deleteBtn.click点击位置的父级的父级
+        var currentBtn = $(this);
+        var tr = currentBtn.parent();
         id=tr.attr("id");
         console.log(id)
         self.noneshowEvent();
@@ -142,7 +142,7 @@ Data.prototype.deleteShowHideEvent=function(){//这个是监听展示与隐藏�
             'success': function (result) {
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/jk/"
                    },1000);
                 }
@@ -152,9 +152,9 @@ Data.prototype.deleteShowHideEvent=function(){//这个是监听展示与隐藏�
     self.lixm.attr("class","active-menu").siblings().removeClass('active-menu');
 };
 
-Data.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
+Data.prototype.editbtnEvent=function(){
     var self=this;
-    var btnprimary=$(".btn-edit");//获取编辑按钮的位置
+    var btnprimary=$(".btn-edit");
     var edititembtn=$(".edit-item-btn");
     var id="";
     var project_name="";
@@ -168,9 +168,8 @@ Data.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
         self.showEvent();
         edititembtn.show();
         self.titlexm.text("编辑项目");
-        //edititembtn.attr('id','edit-item-btn');//修改id属性
-        var currentBtn = $(this);//这里的$(this)就是获取deleteBtn.click的位置，就是我点击的位置
-        var tr = currentBtn.parent();//然后这里parent()是获取点击事件的父级的位置，2个parent是获取deleteBtn.click点击位置的父级的父级
+        var currentBtn = $(this);
+        var tr = currentBtn.parent();
         id=tr.attr("id");
         project_name=tr.attr("project_name");
         responsible_name=tr.attr("responsible_name");
@@ -179,7 +178,7 @@ Data.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
         publish_app=tr.attr("publish_app");
         simple_desc=tr.attr("simple_desc");
         other_desc=tr.attr("other_desc");
-        var project_name1=$('#project_name').val(project_name);//设置文本内容
+        var project_name1=$('#project_name').val(project_name);
         var responsible_name1=$('#responsible_name').val(responsible_name);
         var test_user1=$('#test_user').val(test_user);
         var dev_user1=$('#dev_user').val(dev_user);
@@ -188,7 +187,7 @@ Data.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
         var other_desc1=$('#other_desc').val(other_desc);
         console.log(other_desc1)
         edititembtn.click(function(){
-            var project_name2=$('#project_name').val();//清空文本信息
+            var project_name2=$('#project_name').val();
             var responsible_name2=$('#responsible_name').val();
             var test_user2=$('#test_user').val();
             var dev_user2=$('#dev_user').val();
@@ -211,7 +210,7 @@ Data.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
                 if(result['code'] === 200){
                     window.messageBox.show(result["message"]);
                     console.log("已执行编辑===")
-                    setTimeout(function(){//设置计时器
+                    setTimeout(function(){
                         window.location="/jk/"
                     },1000);
                     self.titlexm.text("添加项目");
@@ -222,14 +221,14 @@ Data.prototype.editbtnEvent=function(){//这个是编辑项目的ajax请求
     });
 };
 
-Data.prototype.editFunctionEvent=function(){//这个是多条条用例运行事件
+Data.prototype.editFunctionEvent=function(){
     var self=this;
     var id="";
-    var successBtn=$('.btn-success');//获取点击运行按钮位置
+    var successBtn=$('.btn-success');
     console.log("运行多条用例")
     successBtn.click(function(){
-        var currentBtn = $(this);//这里的$(this)就是获取deleteBtn.click的位置，就是我点击的位置
-        var tr = currentBtn.parent();//然后这里parent()是获取点击事件的父级的位置，2个parent是获取deleteBtn.click点击位置的父级的父级
+        var currentBtn = $(this);
+        var tr = currentBtn.parent();
         id=tr.attr("id");
         console.log(id)
         xfzajax.post({
@@ -247,31 +246,30 @@ Data.prototype.editFunctionEvent=function(){//这个是多条条用例运行事�
 
 };
 
-Data.prototype.detailsshowEvent=function(){//这个是显示用例运行详情框
+Data.prototype.detailsshowEvent=function(){
     var self=this;
-    self.detailswrapper.show();//show()是显示
+    self.detailswrapper.show();
 };
-Data.prototype.detailshideEvent=function(){//这个方法是隐藏用例运行详情框
+Data.prototype.detailshideEvent=function(){
     var self=this;
-    self.detailswrapper.hide();//hide()是隐藏
+    self.detailswrapper.hide();
 };
-Data.prototype.detailsShowHideEvent=function(){//这个是监听展示与隐藏用例运行详情框方法包括ajax请求
+Data.prototype.detailsShowHideEvent=function(){
     var self=this;
     var id="";
     var state="";
-    var btnbule=$(".btn-bule");//运行结果按钮
-    var closeBtn=$('#x-eee-btn');//获取删除按钮
+    var btnbule=$(".btn-bule");
+    var closeBtn=$('#x-eee-btn');
     closeBtn.click(function(){
         self.detailshideEvent();
         $("#start-tr").hide();
-        $("tr").remove("#end-tr");//这个是删除thead元素里的class为thead-use这个值
-        //$("tbody").remove("#tbody-id");
+        $("tr").remove("#end-tr");
+
     });
     btnbule.click(function(){
-        var currentBtn = $(this);//这里的$(this)就是获取deleteBtn.click的位置，就是我点击的位置
-        var tr = currentBtn.parent();//然后这里parent()是获取点击事件的父级的位置，2个parent是获取deleteBtn.click点击位置的父级的父级
+        var currentBtn = $(this);
+        var tr = currentBtn.parent();
         id=tr.attr("id");
-        //state=tr.attr("state");
         console.log(id)
         self.detailsshowEvent();
         xfzajax.post({
@@ -287,21 +285,19 @@ Data.prototype.detailsShowHideEvent=function(){//这个是监听展示与隐藏�
                     }else{
                         $("#start-tr").hide();
                         console.log(time_box)
-                        var tpl=template("data-list",{"datalist":time_box});//这里传入我们模板里定义的id,然后模板是通过newses来读取数据，所以这里定义newses并且把我们获取的数据传入进去
-                        var ul=$(".tbody-use");//然后我们需要我们获取的数据显示在哪个标签里，这里是显示在class为list-inner-group属性里
-                        ul.append(tpl);//然后把我们的tpl放到ul里
+                        var tpl=template("data-list",{"datalist":time_box});
+                        var ul=$(".tbody-use");
+                        ul.append(tpl);
                     }
                 }
             }
         });
     });
-    //self.liuse.attr("class","active-menu").siblings().removeClass('active-menu');
 };
 
 
-jq331(function($){//这里就使用jq331这个jqbie名进行调用jq版本3.3.1
+jq331(function($){
     var data=new Data();
-    console.log("执行");//打印日志
-    data.run();//当所有元素加载出来会执行run方法
+    data.run();
     self.lixm.attr("class","active-menu").siblings().removeClass('active-menu');
 });

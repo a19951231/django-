@@ -27,23 +27,22 @@ class Login_view(View):
             pwd=base64.b64decode(password).decode("utf-8")
             remember = form.cleaned_data.get("remember")
             user = authenticate(request, username=telephone, password=pwd)
-            if user:  # 判断这个用户是否存在，如果存在执行下面代码
-                if user.is_active:  # 判断这个用户是否可以使用，可以使用执行下面代码
-                    login(request, user)  # 可以就进行登录，这个是设置session
-                    if remember:  # 判断remember是否为勾选，勾选执行下面代码
-                        request.session.set_expiry(None)  # session保存浏览器时间为django设置的时间长度
-                    else:  # 没有勾选执行下面代码
-                        request.session.set_expiry(0)  # 这里意思是浏览器关闭session就会随浏览器关闭而不保持
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    if remember:
+                        request.session.set_expiry(None)
+                    else:
+                        request.session.set_expiry(0)
                     return restful.result(message="登录成功")
                 else:  # 用户不使用执行下面代码
-                    return restful.unauth(message="您的账号已被冻结")  # 405状态是没有权限
+                    return restful.unauth(message="您的账号已被冻结")
             else:
                 return restful.params_error(message={"password": ["您输入的账号或密码错误"]})
 
         else:
-            errors = form.get_errors()  # 400错误是参数错误
-            # 返回数据类型如:{"password":["xxxx","xxxx"]}
-            return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+            errors = form.get_errors()
+            return restful.params_error(message=errors)
 
 
 #退出登录视图
@@ -51,7 +50,7 @@ class Logout_view(View):
     def get(self,request,*args,**kwargs):
         return render(request,"cms/login.html")
     def post(self,request,*args,**kwargs):
-        logout(request)  # 退出登录 logout(request)
+        logout(request)
         return restful.result(message="退出成功")
 
 @get_required

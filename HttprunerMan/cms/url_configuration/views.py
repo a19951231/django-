@@ -10,7 +10,7 @@ from .forms import Cms_url
 
 @get_required
 @require_GET
-def url_pz(request):#打开环境配置视图
+def url_pz(request):
     id = request.session.get("_auth_user_id")
     url = Urlconfiguratin.objects.filter(user_id=id).order_by("-data_time")
     if id:
@@ -46,13 +46,12 @@ def add_url(request):#添加环境视图
                 url.save()
                 return restful.result(message="添加环境成功！")
     else:
-        errors = form.get_errors()  # 400错误是参数错误
-        # 返回数据类型如:{"password":["xxxx","xxxx"]}
-        return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+        errors = form.get_errors()
+        return restful.params_error(message=errors)
 
 @post_required
 @require_POST
-def delete_url(request):#删除模块视图
+def delete_url(request):
     id=request.POST.get("id")
     if id:
         url_id=Urlconfiguratin.objects.get(pk=id)
@@ -72,7 +71,7 @@ def delete_url(request):#删除模块视图
 
 @post_required
 @require_POST
-def edit_url(request):#编辑项目视图
+def edit_url(request):
     id=request.POST.get("id")
     if id:
         form = Cms_url(request.POST)
@@ -96,8 +95,7 @@ def edit_url(request):#编辑项目视图
                 return restful.unauth(message="您输入id不存在！")
         else:
             print("我已经执行8")
-            errors = form.get_errors()  # 400错误是参数错误
-            # 返回数据类型如:{"password":["xxxx","xxxx"]}
-            return restful.params_error(message=errors)  # 调用restful模板定义的def方法
+            errors = form.get_errors()
+            return restful.params_error(message=errors)
     else:
         return restful.unauth(message="id号不能为空")
