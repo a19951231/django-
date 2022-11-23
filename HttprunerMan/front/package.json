@@ -9,7 +9,7 @@
   "author": "刘学良",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.10",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.3",
